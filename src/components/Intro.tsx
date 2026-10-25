@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getLenis, prefersReducedMotion } from "@/lib/scroll";
 import { site } from "@/content/site";
+import Logo from "./Logo";
 
 const ease = [0.76, 0, 0.24, 1] as const;
 
@@ -60,7 +61,14 @@ export default function Intro() {
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.4, ease }}
           >
-            <span className="text-[15px] font-medium tracking-[-0.02em] text-white/70">
+            <span className="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-white/70">
+              <motion.span
+                className="block text-white"
+                animate={{ rotate: 180 }}
+                transition={{ duration: 1.3, ease: [0.65, 0, 0.35, 1] }}
+              >
+                <Logo className="size-10" />
+              </motion.span>
               {site.name} — {site.role}
             </span>
             <span className="text-[clamp(64px,12vw,180px)] leading-[0.8] font-medium tracking-[-0.06em] tabular-nums">

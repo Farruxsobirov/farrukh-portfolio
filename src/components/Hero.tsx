@@ -79,7 +79,7 @@ export default function Hero() {
 
   return (
     <section
-      id="top"
+      id="top" data-theme="dark"
       ref={root}
       className="relative flex min-h-[100svh] flex-col overflow-clip bg-[linear-gradient(180deg,#8f8f8d_0%,#7a7a78_55%,#4a4a49_100%)] text-white"
     >

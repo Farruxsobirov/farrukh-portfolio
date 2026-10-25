@@ -106,7 +106,7 @@ export default function Work() {
 
   return (
     <>
-      <section id="work" ref={root} className="relative h-[460vh] bg-bg">
+      <section id="work" data-theme="light" ref={root} className="relative h-[460vh] bg-bg">
         <div className="sticky top-0 h-[100svh] overflow-hidden">
           <div className="dot-grid absolute inset-0 opacity-60" />
           <div className="pointer-events-none absolute -top-1/3 left-1/2 size-[80vmax] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,.9),transparent_60%)]" />
@@ -134,7 +134,7 @@ export default function Work() {
         </div>
       </section>
 
-      <section aria-labelledby="work-list" className="gutter relative bg-bg pt-10 pb-28 md:pb-40">
+      <section data-theme="light" aria-labelledby="work-list" className="gutter relative bg-bg pt-10 pb-28 md:pb-40">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-rule pb-6">
           <h2 id="work-list" className="heading text-[clamp(30px,3.4vw,48px)]">
             Selected work. <span className="text-soft">2025 — 2026</span>

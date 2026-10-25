@@ -17,7 +17,7 @@ const rise = (i: number) => ({
 
 export default function About() {
   return (
-    <section id="about" className="relative bg-[linear-gradient(180deg,#4a4a49_0%,#262626_45%,#141414_100%)] pt-6 pb-24 md:pb-36">
+    <section id="about" data-theme="dark" className="relative bg-[linear-gradient(180deg,#4a4a49_0%,#262626_45%,#141414_100%)] pt-6 pb-24 md:pb-36">
       <div className="dot-grid-dark pointer-events-none absolute inset-0" />
       <div className="gutter relative grid gap-3 lg:grid-cols-[1fr_2fr]">
         <motion.article

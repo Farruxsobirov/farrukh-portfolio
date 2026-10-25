@@ -226,7 +226,7 @@ export default function Journey() {
   }, []);
 
   return (
-    <section id="journey" ref={root} className="relative h-[520vh] bg-dark text-white">
+    <section id="journey" data-theme="dark" ref={root} className="relative h-[520vh] bg-dark text-white">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <div className="dot-grid-dark absolute inset-0" />
         <div className="pointer-events-none absolute top-[-20%] left-[30%] size-[70vmax] rounded-full bg-[radial-gradient(circle,rgba(0,0,0,.75),transparent_60%)]" />

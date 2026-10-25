@@ -84,7 +84,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="gutter relative bg-bg pb-24">
+    <section id="contact" data-theme="light" className="gutter relative bg-bg pb-24">
       <div className="grid gap-3 lg:grid-cols-[1.35fr_1fr]">
         <div className="flex flex-col gap-3">
           <div className="rounded-card bg-white p-7 md:p-10">

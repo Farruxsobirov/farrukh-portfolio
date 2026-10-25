@@ -10,7 +10,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Services() {
   return (
-    <section id="services" className="relative overflow-clip bg-bg pt-10 pb-28 md:pt-16 md:pb-40">
+    <section id="services" data-theme="light" className="relative overflow-clip bg-bg pt-10 pb-28 md:pt-16 md:pb-40">
       <div className="gutter">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div>

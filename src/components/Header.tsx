@@ -6,6 +6,11 @@ import { nav, site } from "@/content/site";
 import { scrollToId, getLenis } from "@/lib/scroll";
 import { sound } from "@/lib/sound";
 import { icons, Roll } from "./ui";
+import { Petals, Centre } from "./Logo";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ease = [0.32, 0.72, 0, 1] as const;
 
@@ -41,10 +46,37 @@ function RoundButton({
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const soundOn = useSyncExternalStore(sound.subscribe, () => sound.enabled, () => false);
 
   useEffect(() => {
     sound.restore();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // The mark turns slowly as the page scrolls.
+    const tween = gsap.to("[data-logo-spin]", {
+      rotate: 540,
+      ease: "none",
+      scrollTrigger: { start: 0, end: "max", scrub: 1.2 },
+    });
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, []);
+
+  // Switch the logo between white and black depending on the section behind it.
+  useEffect(() => {
+    const triggers = Array.from(document.querySelectorAll<HTMLElement>("[data-theme]")).map((el) =>
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 48px",
+        end: "bottom 48px",
+        onToggle: (self) => {
+          if (self.isActive) setTheme(el.dataset.theme === "light" ? "light" : "dark");
+        },
+      }),
+    );
+    return () => triggers.forEach((t) => t.kill());
   }, []);
 
   useEffect(() => {
@@ -68,11 +100,15 @@ export default function Header() {
         type="button"
         onClick={() => go("top")}
         aria-label={`${site.name}, back to top`}
-        className="press fixed top-5 left-[var(--gutter)] z-50 text-white mix-blend-difference md:top-7"
+        className={`group press fixed top-4 left-[var(--gutter)] z-50 size-12 transition-colors duration-500 md:top-6 ${
+          theme === "dark" ? "text-white" : "text-ink"
+        }`}
       >
-        <span className="block text-[26px] leading-none font-semibold tracking-[-0.06em]">
-          {site.initials}
-          <span>.</span>
+        <span data-logo-spin className="relative block size-full">
+          <span className="block size-full transition-transform duration-700 ease-[var(--ease-snap)] group-hover:rotate-90">
+            <Petals className="size-full" />
+          </span>
+          <Centre className="absolute inset-0 size-full" />
         </span>
       </button>
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-start justify-between p-[var(--gutter)] pt-5 md:pt-7">
