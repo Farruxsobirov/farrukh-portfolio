@@ -114,7 +114,7 @@ export default function Contact() {
               <span className="relative size-16 overflow-hidden rounded-full bg-[#e7e7e4] ring-4 ring-white">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/farrukh-avatar.webp"
+                  src="/farrukh-contact.webp"
                   alt={site.name}
                   className="size-full object-cover grayscale transition-[filter,scale] duration-500 group-hover/avatar:scale-110 group-hover/avatar:grayscale-0"
                 />
