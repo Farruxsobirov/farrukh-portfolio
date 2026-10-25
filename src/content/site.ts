@@ -118,6 +118,28 @@ export const projects: Project[] = [
     tags: ["WooCommerce", "PHP", "ACF", "JavaScript"],
   },
   {
+    slug: "labpuppies",
+    name: "Lab Puppies Illinois",
+    year: "2026",
+    url: "https://labpuppiesillinois.com/",
+    image: "/projects/labpuppies.webp",
+    kind: "Breeder website on WordPress",
+    summary:
+      "Website for a licensed English Labrador kennel near St. Louis. Available puppies and upcoming litters managed through ACF Pro, with custom-coded sections on top of Elementor.",
+    tags: ["WordPress", "Elementor", "ACF Pro", "Custom code"],
+  },
+  {
+    slug: "limestudio",
+    name: "Lime Studio",
+    year: "2026",
+    url: "https://webcam-studio-lime.com/",
+    image: "/projects/limestudio.webp",
+    kind: "Recruitment website on WordPress",
+    summary:
+      "Russian-language recruitment site for a Saint Petersburg studio, with an earnings calculator, vacancies, reviews, news and FAQ. Built with Elementor Pro, ACF Pro and custom code.",
+    tags: ["WordPress", "Elementor Pro", "ACF Pro", "Custom code"],
+  },
+  {
     slug: "bhlabs",
     name: "BH Labs",
     year: "2025",

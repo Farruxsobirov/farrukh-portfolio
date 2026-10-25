@@ -144,14 +144,17 @@ export default function Contact() {
         <div className="flex flex-col gap-6 rounded-card bg-white p-7 md:p-10 lg:sticky lg:top-24 lg:self-start">
           <div>
             <div className="group/avatar mb-6 flex items-center gap-3">
-              <span className="relative size-16 overflow-hidden rounded-full bg-[#e7e7e4] ring-4 ring-white">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/farrukh-contact.webp"
-                  alt={site.name}
-                  className="size-full object-cover grayscale transition-[filter,scale] duration-500 group-hover/avatar:scale-110 group-hover/avatar:grayscale-0"
-                />
-                <span className="absolute right-0.5 bottom-0.5 size-3.5 rounded-full border-2 border-white bg-[#3ddc84]" />
+              {/* Outer wrapper is not clipped, so the status dot can sit on the edge */}
+              <span className="relative size-16 shrink-0">
+                <span className="block size-full overflow-hidden rounded-full bg-[#e7e7e4]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/farrukh-contact.webp"
+                    alt={site.name}
+                    className="size-full object-cover grayscale transition-[filter,scale] duration-500 group-hover/avatar:scale-110 group-hover/avatar:grayscale-0"
+                  />
+                </span>
+                <span aria-label="Online" className="pulse-dot absolute right-0 bottom-0.5 size-4 rounded-full border-[3px] border-white bg-[#3ddc84]" />
               </span>
               <span className="text-[14px] leading-tight">
                 <span className="block font-medium">{site.name}</span>
