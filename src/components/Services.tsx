@@ -10,7 +10,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Services() {
   return (
-    <section id="services" data-theme="light" className="relative overflow-clip bg-bg pt-10 pb-28 md:pt-16 md:pb-40">
+    <section id="services" data-theme="light" className="relative overflow-clip bg-bg pt-12 pb-16 md:pt-16 md:pb-40">
       <div className="gutter">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -56,7 +56,7 @@ export default function Services() {
         </div>
       </div>
 
-      <div className="mt-24 md:mt-32">
+      <div className="mt-16 md:mt-32">
         <p className="gutter mb-6 text-[13px] font-medium text-muted">Stack · 02/02</p>
         <div className="flex overflow-hidden border-y border-rule py-6 md:py-8" aria-label={`Technologies: ${stack.join(", ")}`}>
           <div className="marquee flex w-max shrink-0" aria-hidden>

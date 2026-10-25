@@ -33,7 +33,7 @@ function RoundButton({
       aria-label={label}
       aria-pressed={active}
       onClick={onClick}
-      className={`press grid size-12 place-items-center rounded-full border transition-colors duration-200 ${
+      className={`press grid size-11 place-items-center rounded-full border md:size-12 transition-colors duration-200 ${
         accent
           ? "border-accent bg-accent text-white hover:bg-accent-ink"
           : "border-white/10 bg-[#2a2a2a] text-white hover:bg-[#3a3a3a]"
@@ -47,6 +47,7 @@ function RoundButton({
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [scrolled, setScrolled] = useState(false);
   const soundOn = useSyncExternalStore(sound.subscribe, () => sound.enabled, () => false);
 
   useEffect(() => {
@@ -62,6 +63,13 @@ export default function Header() {
       tween.scrollTrigger?.kill();
       tween.kill();
     };
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 120);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // Switch the logo between white and black depending on the section behind it.
@@ -96,11 +104,18 @@ export default function Header() {
 
   return (
     <>
+      {/* Phones: a soft frosted bar so content scrolling underneath stays readable */}
+      <div
+        aria-hidden
+        className={`pointer-events-none fixed inset-x-0 top-0 z-40 h-[76px] backdrop-blur-md transition-[opacity,background-color] duration-500 md:hidden ${
+          scrolled ? "opacity-100" : "opacity-0"
+        } ${theme === "dark" ? "bg-[#141414]/70" : "bg-[#f3f3f2]/80"}`}
+      />
       <button
         type="button"
         onClick={() => go("top")}
         aria-label={`${site.name}, back to top`}
-        className={`group press fixed top-4 left-[var(--gutter)] z-50 size-12 transition-colors duration-500 md:top-6 ${
+        className={`group press fixed top-4 left-[var(--gutter)] z-50 size-11 transition-colors duration-500 md:top-6 md:size-12 ${
           theme === "dark" ? "text-white" : "text-ink"
         }`}
       >
@@ -111,7 +126,7 @@ export default function Header() {
           <Centre className="absolute inset-0 size-full" />
         </span>
       </button>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-start justify-between p-[var(--gutter)] pt-5 md:pt-7">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-start justify-between p-[var(--gutter)] pt-4 md:pt-7">
         <span />
         <nav className="pointer-events-auto relative flex items-center gap-2" aria-label="Quick actions">
           <RoundButton label="Contact" accent onClick={() => go("contact")}>

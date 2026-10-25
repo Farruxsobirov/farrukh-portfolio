@@ -85,32 +85,38 @@ export default function Hero() {
     >
       <div data-hero-bg className="absolute inset-0 origin-[50%_35%]">
         <div className="dot-grid-dark absolute inset-0 opacity-60" />
-        <div className="absolute inset-x-[-10%] top-[-12%] bottom-[8%]">
+        {/* On phones the shape sits in the empty middle band, away from the text */}
+        <div className="absolute inset-x-[-25%] top-[24%] bottom-[24%] opacity-70 md:right-[20%] md:left-[-2%] md:top-[-8%] md:bottom-[10%] md:opacity-100">
           <Halftone variant="blob" color="rgba(255,255,255,0.92)" spacing={9} speed={0.9} />
         </div>
       </div>
 
-      <div data-hero-parallax className="gutter relative z-10 flex flex-1 flex-col justify-between gap-10 pt-28 md:pt-36">
-        <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start">
-          <div className="flex flex-col gap-4">
-            <p data-reveal className="flex items-center gap-2 text-[14px] font-medium text-white/85">
-              <span className="pulse-dot size-2 rounded-full bg-[#3ddc84]" /> {site.availability}
-            </p>
-            <p data-reveal className="flex items-baseline gap-2">
-              <span className="text-[clamp(52px,6vw,84px)] leading-[0.9] font-medium tracking-[-0.055em]">50+</span>
-              <span className="text-[clamp(20px,2vw,28px)] tracking-[-0.03em] text-white/80">/projects shipped</span>
-            </p>
-            <div data-reveal className="mt-2 flex flex-wrap gap-2">
-              <Pill label="Let's talk" sub="Reply within 1 hour" onClick={() => scrollToId("contact")} />
-              <Pill label="See my work" tone="ghostLight" onClick={() => scrollToId("work")} />
-            </div>
+      <div
+        data-hero-parallax
+        className="gutter relative z-10 grid flex-1 grid-rows-[auto_1fr_auto_auto] gap-x-10 pt-24 [grid-template-areas:'top'_'space'_'head'_'word'] md:grid-cols-[1fr_1.1fr] md:grid-rows-[auto_1fr_auto] md:pt-36 md:[grid-template-areas:'top_head'_'space_space'_'word_word']"
+      >
+        <div className="flex flex-col gap-4 [grid-area:top]">
+          <p data-reveal className="flex items-center gap-2 text-[14px] font-medium text-white/90">
+            <span className="pulse-dot size-2 rounded-full bg-[#3ddc84]" /> {site.availability}
+          </p>
+          <p data-reveal className="flex items-baseline gap-2">
+            <span className="text-[clamp(52px,6vw,84px)] leading-[0.9] font-medium tracking-[-0.055em]">50+</span>
+            <span className="text-[clamp(20px,2vw,28px)] tracking-[-0.03em] text-white/85">/projects shipped</span>
+          </p>
+          <div data-reveal className="mt-2 flex flex-wrap gap-2">
+            <Pill label="Let's talk" sub="Reply within 1 hour" onClick={() => scrollToId("contact")} />
+            <Pill label="See my work" tone="ghostLight" onClick={() => scrollToId("work")} />
           </div>
-          <h1 data-reveal className="heading max-w-[17ch] text-[clamp(30px,3.6vw,52px)] md:justify-self-end">
-            {site.headline.strong} <span className="text-white/55">{site.headline.soft}</span>
-          </h1>
         </div>
+        <div className="[grid-area:space] min-h-10" />
+        <h1
+          data-reveal
+          className="heading mb-6 max-w-[17ch] text-[clamp(30px,3.6vw,52px)] [grid-area:head] [text-shadow:0_1px_24px_rgba(0,0,0,.18)] md:mb-0 md:justify-self-end"
+        >
+          {site.headline.strong} <span className="text-white/70">{site.headline.soft}</span>
+        </h1>
 
-        <div ref={wordWrap} className="relative pb-[2vw]" aria-label={site.name}>
+        <div ref={wordWrap} className="relative pb-5 [grid-area:word] md:pb-[2vw]" aria-label={site.name}>
           <div
             ref={word}
             aria-hidden

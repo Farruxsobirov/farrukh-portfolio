@@ -134,7 +134,7 @@ export default function Work() {
         </div>
       </section>
 
-      <section data-theme="light" aria-labelledby="work-list" className="gutter relative bg-bg pt-10 pb-28 md:pb-40">
+      <section data-theme="light" aria-labelledby="work-list" className="gutter relative bg-bg pt-12 pb-16 md:pt-10 md:pb-40">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-rule pb-6">
           <h2 id="work-list" className="heading text-[clamp(30px,3.4vw,48px)]">
             Selected work. <span className="text-soft">2025 — 2026</span>

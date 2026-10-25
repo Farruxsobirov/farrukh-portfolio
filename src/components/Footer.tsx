@@ -11,7 +11,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Footer() {
   return (
-    <footer data-theme="light" className="relative overflow-clip bg-bg pt-24 md:pt-36">
+    <footer data-theme="light" className="relative overflow-clip bg-bg pt-16 md:pt-36">
       <div className="pointer-events-none absolute right-[-10%] bottom-0 h-[70%] w-[70%] opacity-[0.07]">
         <Halftone variant="orb" color="#111" spacing={12} maxRadius={5} speed={0.5} />
       </div>
@@ -31,7 +31,7 @@ export default function Footer() {
           <Pill label="Back to top" tone="ghost" onClick={() => scrollToId("top")} />
         </div>
 
-        <div className="mt-24 grid gap-10 border-t border-rule py-10 sm:grid-cols-3">
+        <div className="mt-16 grid grid-cols-2 gap-10 border-t border-rule py-10 sm:grid-cols-3 md:mt-24">
           <div>
             <p className="mb-4 text-[13px] text-muted">Explore</p>
             <ul className="flex flex-col gap-1.5">
@@ -56,7 +56,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div className="flex flex-col justify-between gap-6 sm:items-end sm:text-right">
+          <div className="col-span-2 flex flex-col justify-between gap-6 sm:col-span-1 sm:items-end sm:text-right">
             <p className="group flex items-center gap-3">
               <span className="text-[17px] font-medium tracking-[-0.03em]">{site.name}</span>
               <span className="block transition-transform duration-700 ease-[var(--ease-snap)] group-hover:rotate-90">
