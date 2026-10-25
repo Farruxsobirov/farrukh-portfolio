@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Farrukh Sobirov — Portfolio
 
-## Getting Started
+Personal portfolio built with **Next.js 16**, **React 19**, **Tailwind CSS 4**, **GSAP ScrollTrigger**, **Lenis**, **Framer Motion** and **React Three Fiber**.
 
-First, run the development server:
+## Features
+
+- Shutter intro and smooth scrolling (Lenis)
+- Hero with an animated halftone canvas and a wordmark whose letters turn away on scroll
+- Live dot-matrix charts in the About cards
+- Pinned "Journey" timeline: a dotted calendar ruler that becomes a perspective road
+- Dark → light dot transition into a 3D curved project carousel (Three.js)
+- Services, tech-stack marquee, FAQ, contact form (opens the visitor's email app)
+- Optional UI sounds (off by default), reduced-motion support, responsive down to phones
+
+## Edit the content
+
+Everything (name, text, projects, services, links) lives in [`src/content/site.ts`](src/content/site.ts).
+Project images are in `public/projects/` (16:9 WebP or JPG works best).
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open http://localhost:3000.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push this repository to GitHub.
+2. In Vercel: **Add New → Project → Import** the repository.
+3. Keep the defaults (Framework: Next.js) and click **Deploy**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Every push to `main` redeploys automatically.
+
+## Credits
+
+Typeface: [Overused Grotesk](https://github.com/RandomMaerks/Overused-Grotesk) by Bao Nguyen, SIL Open Font License 1.1 (`src/fonts/OFL-LICENSE.txt`).
