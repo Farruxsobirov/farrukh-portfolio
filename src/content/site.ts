@@ -17,9 +17,12 @@ export const site = {
   },
   description:
     "Web developer with 3+ years of experience building headless Next.js + WordPress websites, custom WordPress themes and WooCommerce stores for clients around the world.",
+  telegram: "https://t.me/FarruxSobirov",
+  fiverr: "https://www.fiverr.com/farrux_sobirov",
   socials: [
+    { label: "Telegram", href: "https://t.me/FarruxSobirov" },
     { label: "Fiverr", href: "https://www.fiverr.com/farrux_sobirov" },
-    { label: "GitHub", href: "https://github.com/" },
+    { label: "GitHub", href: "https://github.com/Farruxsobirov" },
     { label: "Email", href: "mailto:farrux.work.in@gmail.com" },
   ],
 };

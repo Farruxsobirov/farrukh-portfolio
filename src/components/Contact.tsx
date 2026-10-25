@@ -121,7 +121,8 @@ export default function Contact() {
           </div>
           <div className="flex flex-wrap gap-2">
             <Pill label="Email me" sub={site.email} href={`mailto:${site.email}`} />
-            <Pill label="Hire on Fiverr" tone="ghost" href={site.socials[0].href} external />
+            <Pill label="Telegram" sub="@FarruxSobirov" tone="dark" href={site.telegram} external />
+            <Pill label="Hire on Fiverr" tone="ghost" href={site.fiverr} external />
           </div>
 
           <form onSubmit={submit} className="flex flex-col gap-2 border-t border-rule pt-6">

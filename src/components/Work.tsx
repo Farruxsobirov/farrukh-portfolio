@@ -21,6 +21,7 @@ export default function Work() {
   const dots = useRef<HTMLCanvasElement>(null);
   const title = useRef<HTMLDivElement>(null);
   const hint = useRef<HTMLParagraphElement>(null);
+  const shadow = useRef<HTMLDivElement>(null);
   const progress = useRef(0);
   const [active, setActive] = useState(false);
 
@@ -87,6 +88,7 @@ export default function Work() {
           title.current.style.opacity = String(tIn);
           title.current.style.transform = `scale(${0.92 + tIn * 0.08})`;
         }
+        if (shadow.current) shadow.current.style.opacity = String(clamp01((self.progress - 0.24) / 0.15));
         if (hint.current) hint.current.style.opacity = String(clamp01((self.progress - 0.4) / 0.1) * (1 - clamp01((self.progress - 0.92) / 0.06)));
       },
     });
@@ -117,6 +119,11 @@ export default function Work() {
             </h2>
           </div>
 
+          <div
+            ref={shadow}
+            aria-hidden
+            className="pointer-events-none absolute bottom-[12%] left-1/2 h-[22vh] w-[70vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(0,0,0,.16),transparent)] opacity-0 blur-2xl"
+          />
           {active && <Carousel3D projects={projects} progress={progress} active={active} onNext={() => scrollToId("contact")} />}
 
           <p ref={hint} className="pointer-events-none absolute inset-x-0 bottom-8 text-center text-[13px] font-medium text-muted opacity-0">
