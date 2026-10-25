@@ -40,6 +40,7 @@ export async function POST(request: Request) {
   const name = String(body.name ?? "").trim().slice(0, LIMITS.name);
   const email = String(body.email ?? "").trim().slice(0, LIMITS.email);
   const message = String(body.message ?? "").trim().slice(0, LIMITS.message);
+  const lang = ["en", "uz", "ru"].includes(String(body.lang)) ? String(body.lang).toUpperCase() : "EN";
 
   if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ ok: false, error: "invalid" }, { status: 422 });
@@ -55,6 +56,7 @@ export async function POST(request: Request) {
     "",
     `<b>Name:</b> ${escape(name)}`,
     `<b>Email:</b> ${escape(email)}`,
+    `<b>Language:</b> ${lang}`,
     "",
     escape(message),
   ].join("\n");

@@ -5,11 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { getLenis, prefersReducedMotion } from "@/lib/scroll";
 import { site } from "@/content/site";
 import Logo from "./Logo";
+import { useI18n } from "@/i18n/context";
 
 const ease = [0.76, 0, 0.24, 1] as const;
 
 // Four dark shutters that lift away once the page is ready.
 export default function Intro() {
+  const { t } = useI18n();
   const [done, setDone] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -69,7 +71,7 @@ export default function Intro() {
               >
                 <Logo className="size-10" />
               </motion.span>
-              {site.name} — {site.role}
+              {site.name} — {t.common.role}
             </span>
             <span className="text-[clamp(64px,12vw,180px)] leading-[0.8] font-medium tracking-[-0.06em] tabular-nums">
               {count}

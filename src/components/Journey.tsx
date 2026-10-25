@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { journey } from "@/content/site";
+import { journeyYears } from "@/content/site";
+import { fmt, useI18n } from "@/i18n/context";
 import { prefersReducedMotion } from "@/lib/scroll";
 import { sound } from "@/lib/sound";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const START_YEAR = 2023;
 const TOTAL_MONTHS = 46; // Jan 2023 -> Oct 2026
 const TICKS = 4; // rows per month
@@ -57,6 +57,10 @@ function Mask({ children, delay = 0 }: { children: string; delay?: number }) {
 }
 
 export default function Journey() {
+  const { t } = useI18n();
+  const MONTHS = t.journey.months;
+  const monthLabel = t.journey.monthLabel;
+  const statement = t.journey.statement.split(" ");
   const root = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const words = useRef<HTMLSpanElement[]>([]);
@@ -150,7 +154,7 @@ export default function Journey() {
         const monthsIn = Math.floor(idx / TICKS) + 1;
         ctx.fillStyle = `rgba(255,255,255,${0.6 * fade})`;
         ctx.textAlign = "left";
-        ctx.fillText(`MONTH ${monthsIn}`, x0 + 32 * dotGap + 18, cy);
+        ctx.fillText(fmt(monthLabel, { n: monthsIn }), x0 + 32 * dotGap + 18, cy);
       }
 
       // 2. The road: rows fan out in perspective and keep travelling toward you
@@ -190,8 +194,8 @@ export default function Journey() {
       words.current.forEach((el, i) => {
         if (!el) return;
         const on = i < k;
-        const isLast = i === words.current.length - 1;
-        el.style.color = on ? (isLast ? "var(--accent)" : "#fff") : "rgba(255,255,255,0.22)";
+        const isAccent = el.dataset.accent === "1";
+        el.style.color = on ? (isAccent ? "var(--accent)" : "#fff") : "rgba(255,255,255,0.22)";
       });
       raf = requestAnimationFrame(loop);
     };
@@ -223,7 +227,7 @@ export default function Journey() {
       ro.disconnect();
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [MONTHS, monthLabel]);
 
   return (
     <section id="journey" data-theme="dark" ref={root} className="relative h-[520vh] bg-dark text-white">
@@ -238,9 +242,9 @@ export default function Journey() {
           <div className="hidden md:block" />
           <div className="flex flex-col justify-center pt-16">
             <div className="relative min-h-[300px] md:min-h-[340px]">
-              {journey.steps.map((st, i) => (
+              {t.journey.steps.map((st, i) => (
                 <motion.div
-                  key={st.year}
+                  key={journeyYears[i]}
                   className="absolute inset-x-0 top-0 max-w-[30rem]"
                   initial={false}
                   animate={step === i ? "in" : step > i ? "past" : "future"}
@@ -252,7 +256,7 @@ export default function Journey() {
                     className="mb-4 flex items-center gap-2 text-[14px] font-medium text-white/80"
                   >
                     <span className="size-1.5 rounded-full bg-accent" />
-                    {st.label} · {st.year}
+                    {t.journey.step} {String(i + 1).padStart(2, "0")} · {journeyYears[i]}
                   </motion.p>
                   <h3 className="heading text-[clamp(34px,4vw,58px)]">
                     <Mask>{st.title}</Mask>
@@ -269,12 +273,13 @@ export default function Journey() {
                 transition={{ duration: 0.8, ease }}
                 aria-hidden={step !== 3}
               >
-                {journey.statement.map((wd, i) => (
+                {statement.map((wd, i) => (
                   <span
                     key={i}
                     ref={(el) => {
                       if (el) words.current[i] = el;
                     }}
+                    data-accent={wd === t.journey.accent ? "1" : undefined}
                     className="transition-colors duration-300"
                     style={{ color: "rgba(255,255,255,0.22)" }}
                   >

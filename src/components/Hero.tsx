@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { site } from "@/content/site";
+import { useI18n } from "@/i18n/context";
 import { scrollToId, prefersReducedMotion } from "@/lib/scroll";
 import Halftone from "./Halftone";
 import { Pill } from "./ui";
@@ -13,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 const useIso = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export default function Hero() {
+  const { t } = useI18n();
   const root = useRef<HTMLElement>(null);
   const word = useRef<HTMLDivElement>(null);
   const wordWrap = useRef<HTMLDivElement>(null);
@@ -97,15 +99,15 @@ export default function Hero() {
       >
         <div className="flex flex-col gap-4 [grid-area:top]">
           <p data-reveal className="flex items-center gap-2 text-[14px] font-medium text-white/90">
-            <span className="pulse-dot size-2 rounded-full bg-[#3ddc84]" /> {site.availability}
+            <span className="pulse-dot size-2 rounded-full bg-[#3ddc84]" /> {t.common.availability}
           </p>
           <p data-reveal className="flex items-baseline gap-2">
             <span className="text-[clamp(52px,6vw,84px)] leading-[0.9] font-medium tracking-[-0.055em]">50+</span>
-            <span className="text-[clamp(20px,2vw,28px)] tracking-[-0.03em] text-white/85">/projects shipped</span>
+            <span className="text-[clamp(20px,2vw,28px)] tracking-[-0.03em] text-white/85">{t.hero.projectsShipped}</span>
           </p>
           <div data-reveal className="mt-2 flex flex-wrap gap-2">
-            <Pill label="Let's talk" sub="Reply within 1 hour" onClick={() => scrollToId("contact")} />
-            <Pill label="See my work" tone="ghostLight" onClick={() => scrollToId("work")} />
+            <Pill label={t.hero.letsTalk} sub={t.common.replyWithinHour} onClick={() => scrollToId("contact")} />
+            <Pill label={t.hero.seeWork} tone="ghostLight" onClick={() => scrollToId("work")} />
           </div>
         </div>
         <div className="[grid-area:space] min-h-10" />
@@ -113,7 +115,7 @@ export default function Hero() {
           data-reveal
           className="heading mb-6 max-w-[17ch] text-[clamp(30px,3.6vw,52px)] [grid-area:head] [text-shadow:0_1px_24px_rgba(0,0,0,.18)] md:mb-0 md:justify-self-end"
         >
-          {site.headline.strong} <span className="text-white/70">{site.headline.soft}</span>
+          {t.hero.strong} <span className="text-white/70">{t.hero.soft}</span>
         </h1>
 
         <div ref={wordWrap} className="relative pb-5 [grid-area:word] md:pb-[2vw]" aria-label={site.name}>

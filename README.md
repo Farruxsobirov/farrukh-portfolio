@@ -14,7 +14,12 @@ Personal portfolio built with **Next.js 16**, **React 19**, **Tailwind CSS 4**, 
 
 ## Edit the content
 
-Everything (name, text, projects, services, links) lives in [`src/content/site.ts`](src/content/site.ts).
+- Wording in each language: [`src/i18n/dictionaries/en.ts`](src/i18n/dictionaries/en.ts), [`uz.ts`](src/i18n/dictionaries/uz.ts), [`ru.ts`](src/i18n/dictionaries/ru.ts). TypeScript fails the build if a language is missing a key.
+- Facts shared by all languages (links, prices, project images, tags): [`src/content/site.ts`](src/content/site.ts).
+
+## Languages
+
+The site is served at `/en`, `/uz` and `/ru`. Visiting `/` redirects to the visitor's saved choice, then their browser language, then English (`src/proxy.ts`). Each page has its own title, description and `hreflang` links.
 Project images are in `public/projects/` (16:9 WebP or JPG works best).
 
 ## Run locally

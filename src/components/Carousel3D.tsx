@@ -16,7 +16,7 @@ const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 const clamp01 = (v: number) => clamp(v, 0, 1);
 const smooth = (t: number) => t * t * (3 - 2 * t);
 
-function nextCardTexture() {
+function nextCardTexture(text: { a: string; b: string; c: string }) {
   const c = document.createElement("canvas");
   c.width = 1024;
   c.height = 576;
@@ -28,12 +28,23 @@ function nextCardTexture() {
   const fam = getComputedStyle(document.body).fontFamily;
   g.fillStyle = "#111";
   g.font = `500 70px ${fam}`;
-  g.fillText("Your project,", 80, 270);
+  const fitFont = (s: string, size: number, weight: number, max: number) => {
+    let px = size;
+    g.font = `${weight} ${px}px ${fam}`;
+    while (g.measureText(s).width > max && px > 20) {
+      px -= 2;
+      g.font = `${weight} ${px}px ${fam}`;
+    }
+  };
+  fitFont(text.a, 70, 500, 860);
+  g.fillText(text.a, 80, 270);
   g.fillStyle = "#fe4701";
-  g.fillText("next.", 80, 350);
+  fitFont(text.b, 70, 500, 860);
+  g.fillText(text.b, 80, 350);
   g.fillStyle = "rgba(17,17,17,.55)";
   g.font = `400 28px ${fam}`;
-  g.fillText("Let's build something great together.", 82, 430);
+  fitFont(text.c, 28, 400, 860);
+  g.fillText(text.c, 82, 430);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   t.anisotropy = 8;
@@ -87,11 +98,12 @@ type RingProps = {
   projects: Project[];
   progress: MutableRefObject<number>;
   onNext: () => void;
+  nextText: { a: string; b: string; c: string };
 };
 
-function Ring({ projects, progress, onNext }: RingProps) {
+function Ring({ projects, progress, onNext, nextText }: RingProps) {
   const textures = useTexture(projects.map((p) => p.image));
-  const extra = useMemo(() => nextCardTexture(), []);
+  const extra = useMemo(() => nextCardTexture(nextText), [nextText]);
   const mask = useMemo(() => roundedMask(), []);
   const geom = useMemo(() => cardGeometry(), []);
   const all = useMemo(() => {

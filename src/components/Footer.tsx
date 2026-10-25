@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { nav, site } from "@/content/site";
+import { navIds, site } from "@/content/site";
+import { useI18n } from "@/i18n/context";
+import LangSwitch from "./LangSwitch";
 import { scrollToId } from "@/lib/scroll";
 import Halftone from "./Halftone";
 import Logo from "./Logo";
@@ -10,6 +12,7 @@ import { Pill, Roll } from "./ui";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Footer() {
+  const { t } = useI18n();
   return (
     <footer data-theme="light" className="relative overflow-clip bg-bg pt-16 md:pt-36">
       <div className="pointer-events-none absolute right-[-10%] bottom-0 h-[70%] w-[70%] opacity-[0.07]">
@@ -23,34 +26,34 @@ export default function Footer() {
           transition={{ duration: 1.2, ease }}
           className="tight max-w-[14ch] text-[clamp(48px,8.2vw,140px)] font-medium"
         >
-          This is the end of the page.
-          <span className="text-soft"> Your project starts here.</span>
+          {t.footer.titleA}
+          <span className="text-soft"> {t.footer.titleB}</span>
         </motion.h2>
         <div className="mt-10 flex flex-wrap gap-2">
-          <Pill label="Start a project" sub="Free consultation" onClick={() => scrollToId("contact")} />
-          <Pill label="Back to top" tone="ghost" onClick={() => scrollToId("top")} />
+          <Pill label={t.common.startProject} sub={t.common.freeConsultation} onClick={() => scrollToId("contact")} />
+          <Pill label={t.footer.backToTop} tone="ghost" onClick={() => scrollToId("top")} />
         </div>
 
         <div className="mt-16 grid grid-cols-2 gap-10 border-t border-rule py-10 sm:grid-cols-3 md:mt-24">
           <div>
-            <p className="mb-4 text-[13px] text-muted">Explore</p>
+            <p className="mb-4 text-[13px] text-muted">{t.footer.explore}</p>
             <ul className="flex flex-col gap-1.5">
-              {nav.map((n) => (
-                <li key={n.id}>
-                  <button type="button" onClick={() => scrollToId(n.id)} className="group text-[17px] font-medium tracking-[-0.02em]">
-                    <Roll>{n.label}</Roll>
+              {navIds.map((id) => (
+                <li key={id}>
+                  <button type="button" onClick={() => scrollToId(id)} className="group text-[17px] font-medium tracking-[-0.02em]">
+                    <Roll>{t.nav[id]}</Roll>
                   </button>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="mb-4 text-[13px] text-muted">Elsewhere</p>
+            <p className="mb-4 text-[13px] text-muted">{t.footer.elsewhere}</p>
             <ul className="flex flex-col gap-1.5">
               {site.socials.map((s) => (
                 <li key={s.label}>
                   <a href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="group text-[17px] font-medium tracking-[-0.02em]">
-                    <Roll>{s.label}</Roll>
+                    <Roll>{s.label === "email" ? t.common.emailLabel : s.label}</Roll>
                   </a>
                 </li>
               ))}
@@ -63,10 +66,11 @@ export default function Footer() {
                 <Logo className="size-11 text-ink" />
               </span>
             </p>
+            <LangSwitch tone="light" />
             <p className="text-[13px] text-muted">
               © 2026 {site.name}
               <br />
-              {site.location}
+              {t.common.location}
             </p>
           </div>
         </div>

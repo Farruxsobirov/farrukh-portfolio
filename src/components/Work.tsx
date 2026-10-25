@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
-import { projects } from "@/content/site";
+import { projects, projectYears } from "@/content/site";
+import { fmt, plural, useI18n } from "@/i18n/context";
 import { scrollToId, prefersReducedMotion } from "@/lib/scroll";
 import { icons } from "./ui";
 
@@ -17,6 +18,7 @@ const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Work() {
+  const { lang, t } = useI18n();
   const root = useRef<HTMLElement>(null);
   const dots = useRef<HTMLCanvasElement>(null);
   const title = useRef<HTMLDivElement>(null);
@@ -113,9 +115,9 @@ export default function Work() {
 
           <div ref={title} className="absolute inset-0 grid place-items-center opacity-0" style={{ transformOrigin: "50% 50%" }}>
             <h2 className="heading text-center text-[clamp(40px,6vw,92px)]">
-              Made with care.
+              {t.work.titleA}
               <br />
-              <span className="sweep">Built to last.</span>
+              <span className="sweep">{t.work.titleB}</span>
             </h2>
           </div>
 
@@ -124,10 +126,12 @@ export default function Work() {
             aria-hidden
             className="pointer-events-none absolute bottom-[12%] left-1/2 h-[22vh] w-[70vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(0,0,0,.16),transparent)] opacity-0 blur-2xl"
           />
-          {active && <Carousel3D projects={projects} progress={progress} active={active} onNext={() => scrollToId("contact")} />}
+          {active && (
+            <Carousel3D projects={projects} progress={progress} active={active} nextText={t.work.nextCard} onNext={() => scrollToId("contact")} />
+          )}
 
           <p ref={hint} className="pointer-events-none absolute inset-x-0 bottom-8 text-center text-[13px] font-medium text-muted opacity-0">
-            Keep scrolling · click or tap a card to visit the site
+            {t.work.hint}
           </p>
 
           <canvas ref={dots} aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" />
@@ -137,9 +141,9 @@ export default function Work() {
       <section data-theme="light" aria-labelledby="work-list" className="gutter relative bg-bg pt-12 pb-16 md:pt-10 md:pb-40">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-rule pb-6">
           <h2 id="work-list" className="heading text-[clamp(30px,3.4vw,48px)]">
-            Selected work. <span className="text-soft">2025 — 2026</span>
+            {t.work.listTitle} <span className="text-soft">{projectYears}</span>
           </h2>
-          <p className="text-[14px] text-muted">{projects.length} projects · more on request</p>
+          <p className="text-[14px] text-muted">{plural(lang, projects.length, t.work.count)}</p>
         </div>
         <ul className="grid gap-x-4 gap-y-14 md:grid-cols-2">
           {projects.map((p, i) => (
@@ -155,7 +159,7 @@ export default function Work() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={p.image}
-                    alt={`${p.name} website`}
+                    alt={fmt(t.work.siteAlt, { name: p.name })}
                     loading="lazy"
                     className="absolute inset-0 size-full object-cover object-left-top transition-transform duration-[1.2s] ease-[var(--ease-out)] group-hover:scale-[1.04]"
                   />
@@ -166,16 +170,16 @@ export default function Work() {
                 <div className="mt-5 grid gap-3 px-1 md:grid-cols-[1fr_auto]">
                   <div>
                     <h3 className="text-[24px] leading-tight font-medium tracking-[-0.03em]">
-                      {p.name} <span className="text-soft">— {p.kind}</span>
+                      {p.name} <span className="text-soft">— {t.work.projects[p.slug]?.kind}</span>
                     </h3>
-                    <p className="mt-2 max-w-[56ch] text-[15px] leading-[1.45] text-muted">{p.summary}</p>
+                    <p className="mt-2 max-w-[56ch] text-[15px] leading-[1.45] text-muted">{t.work.projects[p.slug]?.summary}</p>
                   </div>
                   <p className="text-[14px] text-soft tabular-nums">{p.year}</p>
                 </div>
                 <ul className="mt-4 flex flex-wrap gap-1.5 px-1">
-                  {p.tags.map((t) => (
-                    <li key={t} className="rounded-full border border-rule px-3 py-1 text-[12px] font-medium text-ink/80">
-                      {t}
+                  {p.tags.map((tag) => (
+                    <li key={tag} className="rounded-full border border-rule px-3 py-1 text-[12px] font-medium text-ink/80">
+                      {t.work.tags[tag] ?? tag}
                     </li>
                   ))}
                 </ul>

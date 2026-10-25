@@ -2,7 +2,10 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { nav, site } from "@/content/site";
+import { navIds, site } from "@/content/site";
+import { fmt, useI18n } from "@/i18n/context";
+import { localeNames } from "@/i18n/config";
+import LangSwitch from "./LangSwitch";
 import { scrollToId, getLenis } from "@/lib/scroll";
 import { sound } from "@/lib/sound";
 import { icons, Roll } from "./ui";
@@ -45,6 +48,7 @@ function RoundButton({
 }
 
 export default function Header() {
+  const { lang, t } = useI18n();
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [scrolled, setScrolled] = useState(false);
@@ -114,7 +118,7 @@ export default function Header() {
       <button
         type="button"
         onClick={() => go("top")}
-        aria-label={`${site.name}, back to top`}
+        aria-label={fmt(t.header.backToTop, { name: site.name })}
         className={`group press fixed top-4 left-[var(--gutter)] z-50 size-11 transition-colors duration-500 md:top-6 md:size-12 ${
           theme === "dark" ? "text-white" : "text-ink"
         }`}
@@ -128,15 +132,26 @@ export default function Header() {
       </button>
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-start justify-between p-[var(--gutter)] pt-4 md:pt-7">
         <span />
-        <nav className="pointer-events-auto relative flex items-center gap-2" aria-label="Quick actions">
-          <RoundButton label="Contact" accent onClick={() => go("contact")}>
+        <nav className="pointer-events-auto relative flex items-center gap-2" aria-label={t.header.quickActions}>
+          <button
+            type="button"
+            aria-label={`${t.common.language}: ${localeNames[lang].full}`}
+            onClick={() => {
+              sound.tick(1200);
+              setOpen(true);
+            }}
+            className="press hidden h-11 place-items-center rounded-full border border-white/10 bg-[#2a2a2a] px-4 text-[12px] font-semibold tracking-[0.04em] text-white transition-colors duration-200 hover:bg-[#3a3a3a] sm:grid md:h-12"
+          >
+            {localeNames[lang].short}
+          </button>
+          <RoundButton label={t.header.contact} accent onClick={() => go("contact")}>
             {icons.mail}
           </RoundButton>
-          <RoundButton label={soundOn ? "Turn sound off" : "Turn sound on"} active={soundOn} onClick={() => sound.toggle()}>
+          <RoundButton label={soundOn ? t.header.soundOff : t.header.soundOn} active={soundOn} onClick={() => sound.toggle()}>
             {soundOn ? icons.soundOn : icons.soundOff}
           </RoundButton>
           <RoundButton
-            label="Menu"
+            label={t.header.menu}
             active={open}
             onClick={() => {
               sound.tick(1200);
@@ -151,7 +166,7 @@ export default function Header() {
               <motion.div
                 key="menu"
                 role="dialog"
-                aria-label="Menu"
+                aria-label={t.header.menu}
                 initial={{ opacity: 0, scale: 0.6, filter: "blur(6px)" }}
                 animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0, scale: 0.7, filter: "blur(6px)" }}
@@ -160,36 +175,40 @@ export default function Header() {
                 className="absolute top-0 right-0 w-[min(340px,calc(100vw-32px))] rounded-[28px] border border-white/10 bg-[#202020] p-5 text-white shadow-[0_30px_80px_-20px_rgba(0,0,0,.6)]"
               >
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="text-[13px] text-white/60">Menu</span>
-                  <button type="button" aria-label="Close menu" onClick={() => setOpen(false)} className="press grid size-8 place-items-center rounded-full text-white/70 hover:text-white">
+                  <span className="text-[13px] text-white/60">{t.header.menu}</span>
+                  <button type="button" aria-label={t.header.closeMenu} onClick={() => setOpen(false)} className="press grid size-8 place-items-center rounded-full text-white/70 hover:text-white">
                     {icons.close}
                   </button>
                 </div>
                 <ul className="flex flex-col">
-                  {nav.map((n, i) => (
+                  {navIds.map((id, i) => (
                     <motion.li
-                      key={n.id}
+                      key={id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.06 + i * 0.035, duration: 0.4, ease }}
                     >
                       <button
                         type="button"
-                        onClick={() => go(n.id)}
+                        onClick={() => go(id)}
                         onMouseEnter={() => sound.tick(2200 + i * 120)}
                         className="group flex w-full items-baseline gap-5 rounded-xl px-1 py-2.5 text-left"
                       >
                         <span className="w-5 text-[12px] text-white/45 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                         <span className="text-[19px] font-medium tracking-[-0.02em]">
-                          <Roll>{n.label}</Roll>
+                          <Roll>{t.nav[id]}</Roll>
                         </span>
                       </button>
                     </motion.li>
                   ))}
                 </ul>
+                <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/10 pt-4">
+                  <span className="text-[12px] text-white/60">{t.common.language}</span>
+                  <LangSwitch />
+                </div>
                 <div className="mt-4 flex items-center gap-2 border-t border-white/10 pt-4 text-[12px] text-white/60">
                   <span className="pulse-dot size-2 rounded-full bg-[#3ddc84]" />
-                  {site.availability}
+                  {t.common.availability}
                 </div>
               </motion.div>
             )}
