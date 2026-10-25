@@ -40,27 +40,27 @@ export default function Hero() {
     const reduced = prefersReducedMotion();
     const ctx = gsap.context(() => {
       const letters = gsap.utils.toArray<HTMLElement>("[data-letter]");
+      const letterIn = gsap.utils.toArray<HTMLElement>("[data-letter-in]");
       const reveal = gsap.utils.toArray<HTMLElement>("[data-reveal]");
 
-      // Entrance once the intro shutters lift
-      gsap.set(letters, { yPercent: reduced ? 0 : 110, rotateX: reduced ? 0 : -80 });
+      // Entrance once the intro shutters lift: each letter slides up into its slot
+      gsap.set(letterIn, { yPercent: reduced ? 0 : 50 });
       gsap.set(reveal, { y: reduced ? 0 : 30, opacity: reduced ? 1 : 0 });
       const enter = () => {
-        gsap.to(letters, { yPercent: 0, rotateX: 0, duration: 1.3, ease: "expo.out", stagger: 0.05 });
+        gsap.to(letterIn, { yPercent: 0, duration: 1.4, ease: "expo.out", stagger: 0.06 });
         gsap.to(reveal, { y: 0, opacity: 1, duration: 1.1, ease: "expo.out", stagger: 0.08, delay: 0.25 });
       };
       if (document.documentElement.dataset.ready) enter();
       else window.addEventListener("intro:done", enter, { once: true });
 
       if (reduced) return;
-      // Letters turn away one by one while scrolling out
+      // Scrolling rolls every letter up to its twin below, one after another.
+      // Scrolling back rolls them down again.
       gsap.to(letters, {
-        rotateX: 92,
-        yPercent: -18,
-        opacity: 0.15,
-        ease: "none",
-        stagger: { each: 0.08, from: "start" },
-        scrollTrigger: { trigger: el, start: "top top", end: "bottom 30%", scrub: 0.6 },
+        yPercent: -50,
+        ease: "power1.inOut",
+        stagger: { each: 0.1, from: "start" },
+        scrollTrigger: { trigger: el, start: "top top", end: "bottom 35%", scrub: 0.8 },
       });
       gsap.to("[data-hero-parallax]", {
         yPercent: -25,
@@ -97,7 +97,7 @@ export default function Hero() {
               <span className="pulse-dot size-2 rounded-full bg-[#3ddc84]" /> {site.availability}
             </p>
             <p data-reveal className="flex items-baseline gap-2">
-              <span className="text-[clamp(52px,6vw,84px)] leading-[0.9] font-medium tracking-[-0.055em]">21+</span>
+              <span className="text-[clamp(52px,6vw,84px)] leading-[0.9] font-medium tracking-[-0.055em]">50+</span>
               <span className="text-[clamp(20px,2vw,28px)] tracking-[-0.03em] text-white/80">/projects shipped</span>
             </p>
             <div data-reveal className="mt-2 flex flex-wrap gap-2">
@@ -110,7 +110,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        <div ref={wordWrap} className="relative pb-[2vw] [perspective:900px]" aria-label={site.name}>
+        <div ref={wordWrap} className="relative pb-[2vw]" aria-label={site.name}>
           <div
             ref={word}
             aria-hidden
@@ -118,9 +118,12 @@ export default function Hero() {
             style={{ fontSize: "16vw" }}
           >
             {site.wordmark.split("").map((l, i) => (
-              <span key={i} className="block overflow-visible">
-                <span data-letter className="inline-block origin-[50%_100%] will-change-transform [backface-visibility:hidden]">
-                  {l}
+              <span key={i} className="block h-[0.8em] overflow-hidden">
+                <span data-letter-in className="block">
+                  <span data-letter className="flex flex-col will-change-transform">
+                    <span className="block h-[0.8em] leading-[0.94]">{l}</span>
+                    <span className="block h-[0.8em] leading-[0.94]">{l}</span>
+                  </span>
                 </span>
               </span>
             ))}

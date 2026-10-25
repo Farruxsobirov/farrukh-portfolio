@@ -110,14 +110,26 @@ export default function Contact() {
 
         <div className="flex flex-col gap-6 rounded-card bg-white p-7 md:p-10 lg:sticky lg:top-24 lg:self-start">
           <div>
+            <div className="group/avatar mb-6 flex items-center gap-3">
+              <span className="relative size-16 overflow-hidden rounded-full bg-[#e7e7e4] ring-4 ring-white">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/farrukh-avatar.webp"
+                  alt={site.name}
+                  className="size-full object-cover grayscale transition-[filter,scale] duration-500 group-hover/avatar:scale-110 group-hover/avatar:grayscale-0"
+                />
+                <span className="absolute right-0.5 bottom-0.5 size-3.5 rounded-full border-2 border-white bg-[#3ddc84]" />
+              </span>
+              <span className="text-[14px] leading-tight">
+                <span className="block font-medium">{site.name}</span>
+                <span className="text-muted">Usually replies within 1 hour</span>
+              </span>
+            </div>
             <h2 className="heading text-[clamp(28px,2.6vw,38px)]">
               Have a project?
               <br />
               <span className="text-soft">Let&apos;s talk.</span>
             </h2>
-            <p className="mt-3 flex items-center gap-2 text-[14px] text-muted">
-              <span className="pulse-dot size-2 rounded-full bg-[#3ddc84]" /> Usually replies within 1 hour
-            </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <Pill label="Email me" sub={site.email} href={`mailto:${site.email}`} />

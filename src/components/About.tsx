@@ -25,13 +25,24 @@ export default function About() {
           className="flex flex-col justify-between gap-12 rounded-card border border-white/10 bg-[#262626] p-7 text-white md:p-10 lg:row-span-2"
         >
           <div className="flex flex-col gap-6">
-            <div className="flex -space-x-2">
-              <span className="grid size-14 place-items-center rounded-full border-2 border-[#262626] bg-accent text-[18px] font-semibold tracking-[-0.04em]">
-                {site.initials}
-              </span>
-              <span className="grid size-14 place-items-center rounded-full border-2 border-[#262626] bg-[#3a3a3a] text-[22px]">
-                ✦
-              </span>
+            <div className="group/photo flex items-end gap-5">
+              <div className="relative h-[190px] w-[150px] shrink-0 overflow-hidden rounded-[26px] border border-white/10 bg-[radial-gradient(circle_at_50%_35%,#4a4a4a,#2a2a2a_70%)] md:h-[220px] md:w-[172px]">
+                <div className="dot-grid-dark absolute inset-0" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/farrukh.webp"
+                  alt={`Portrait of ${site.name}`}
+                  className="absolute inset-x-0 bottom-0 h-[112%] w-full object-cover object-top grayscale transition-[filter,scale] duration-700 ease-[var(--ease-out)] group-hover/photo:scale-[1.04] group-hover/photo:grayscale-0"
+                />
+                <span className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 text-[11px] font-medium backdrop-blur-md">
+                  <span className="pulse-dot size-1.5 rounded-full bg-[#3ddc84]" /> Online
+                </span>
+              </div>
+              <div className="pb-1">
+                <p className="text-[13px] text-white/50">Hi, I&apos;m</p>
+                <p className="text-[22px] leading-tight font-medium tracking-[-0.03em]">{site.name}</p>
+                <p className="mt-1 text-[14px] text-white/55">{site.role} · Next.js & WordPress</p>
+              </div>
             </div>
             <h2 className="heading text-[clamp(26px,2.4vw,34px)]">
               {about.title}

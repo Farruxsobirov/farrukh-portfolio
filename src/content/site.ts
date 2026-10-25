@@ -41,7 +41,7 @@ export const about = {
   soft: "Not the other way around.",
   text: "I build fast, SEO-friendly websites that clients can edit entirely on their own. From pixel-accurate Figma builds to headless Next.js frontends powered by WordPress + ACF, I take full ownership from first call to launch and beyond.",
   stats: [
-    { value: "21+", label: "Projects", note: "Delivered for clients worldwide", chart: "bars" },
+    { value: "50+", label: "Projects", note: "Delivered for clients worldwide", chart: "bars" },
     { value: "5.0", label: "Rating", note: "Average client review score", chart: "pulse" },
     { value: "100%", label: "On time", note: "Every project delivered on schedule", chart: "steps" },
     { value: "3+", label: "Years", note: "Of hands-on web development", chart: "wave" },
