@@ -12,7 +12,8 @@ import { icons } from "./ui";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Carousel3D = dynamic(() => import("./Carousel3D"), { ssr: false });
+const loadCarousel = () => import("./Carousel3D");
+const Carousel3D = dynamic(loadCarousel, { ssr: false });
 
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -25,7 +26,8 @@ export default function Work() {
   const hint = useRef<HTMLParagraphElement>(null);
   const shadow = useRef<HTMLDivElement>(null);
   const progress = useRef(0);
-  const [active, setActive] = useState(false);
+  const [mounted, setMounted] = useState(false); // created early, kept alive
+  const [active, setActive] = useState(false); // animating only while on screen
 
   useEffect(() => {
     const section = root.current;
@@ -97,11 +99,32 @@ export default function Work() {
 
     const io = new IntersectionObserver(([e]) => setActive(e.isIntersecting), { rootMargin: "20% 0px" });
     io.observe(section);
+    // Mount the 3D scene well before the visitor reaches it…
+    const near = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setMounted(true);
+          near.disconnect();
+        }
+      },
+      { rootMargin: "250% 0px" },
+    );
+    near.observe(section);
+    // …and fetch three.js + screenshots in the background once the page is idle.
+    const hasIdle = typeof window.requestIdleCallback === "function";
+    const idle = (cb: () => void) => (hasIdle ? window.requestIdleCallback(cb, { timeout: 3000 }) : setTimeout(cb, 1500));
+    const idleId = idle(() => {
+      loadCarousel();
+      setMounted(true);
+    });
     window.addEventListener("resize", resize);
     resize();
     return () => {
       st.kill();
       io.disconnect();
+      near.disconnect();
+      if (hasIdle) window.cancelIdleCallback(idleId as number);
+      else clearTimeout(idleId as ReturnType<typeof setTimeout>);
       window.removeEventListener("resize", resize);
     };
   }, []);
@@ -126,7 +149,7 @@ export default function Work() {
             aria-hidden
             className="pointer-events-none absolute bottom-[12%] left-1/2 h-[22vh] w-[70vw] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(0,0,0,.16),transparent)] opacity-0 blur-2xl"
           />
-          {active && (
+          {mounted && (
             <Carousel3D projects={projects} progress={progress} active={active} nextText={t.work.nextCard} onNext={() => scrollToId("contact")} />
           )}
 

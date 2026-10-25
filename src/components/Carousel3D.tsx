@@ -4,13 +4,15 @@ import { useMemo, useRef, type MutableRefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
-import type { Project } from "@/content/site";
+import { projects as allProjects, type Project } from "@/content/site";
 import { sound } from "@/lib/sound";
 
 const R = 4.1;
 const CARD_W = 3.3;
 const CARD_H = (CARD_W * 9) / 16;
 const THETA = CARD_W / R;
+
+allProjects.forEach((p) => useTexture.preload(p.image));
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 const clamp01 = (v: number) => clamp(v, 0, 1);
@@ -274,7 +276,7 @@ export default function Carousel3D(props: RingProps & { active: boolean }) {
     <Canvas
       flat
       dpr={[1, 1.75]}
-      frameloop={active ? "always" : "never"}
+      frameloop={active ? "always" : "demand"}
       camera={{ position: [0, 0, R + 7.4], fov: 34 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       style={{ position: "absolute", inset: 0 }}
