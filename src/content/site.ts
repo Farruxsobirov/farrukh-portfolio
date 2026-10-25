@@ -10,7 +10,7 @@ export const site = {
   timezone: "UTC+5",
   availability: "Available for freelance & full-time",
   email: "farrux.work.in@gmail.com",
-  url: "https://farrukh-portfolio.vercel.app",
+  url: "https://farrukh-portfolio-three.vercel.app",
   headline: {
     strong: "Fast, modern websites.",
     soft: "Built with Next.js & WordPress.",
