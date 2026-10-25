@@ -34,6 +34,18 @@ Open http://localhost:3000.
 
 Every push to `main` redeploys automatically.
 
+## Contact form → Telegram
+
+The form posts to `/api/contact`, which forwards the message to Telegram.
+Set two environment variables in Vercel (**Settings → Environment Variables**), then redeploy:
+
+| Name | Value |
+|---|---|
+| `TELEGRAM_BOT_TOKEN` | token from [@BotFather](https://t.me/BotFather) |
+| `TELEGRAM_CHAT_ID` | your chat id (send `/start` to your bot, then open `https://api.telegram.org/bot<TOKEN>/getUpdates` and copy `message.chat.id`) |
+
+Without them the form falls back to opening the visitor's email app. Includes a honeypot field and a simple per-IP rate limit.
+
 ## Credits
 
 Typeface: [Overused Grotesk](https://github.com/RandomMaerks/Overused-Grotesk) by Bao Nguyen, SIL Open Font License 1.1 (`src/fonts/OFL-LICENSE.txt`).
