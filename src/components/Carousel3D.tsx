@@ -7,8 +7,10 @@ import * as THREE from "three";
 import { projects as allProjects, type Project } from "@/content/site";
 import { sound } from "@/lib/sound";
 
-const R = 4.1;
 const CARD_W = 3.3;
+// Ring radius grows with the number of cards (projects + the "next" card) so they never touch.
+const CARD_COUNT = allProjects.length + 1;
+const R = Math.max(4.1, (CARD_W * CARD_COUNT) / (Math.PI * 2 * 0.86));
 const CARD_H = (CARD_W * 9) / 16;
 const THETA = CARD_W / R;
 

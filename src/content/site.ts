@@ -46,6 +46,7 @@ export const projects: Project[] = [
   { slug: "lifeaxislabs", name: "Life Axis Labs", year: "2026", url: "https://lifeaxislabs.com/", image: "/projects/lifeaxislabs.webp", tags: ["WooCommerce", "PHP", "ACF", "JavaScript"] },
   { slug: "labpuppies", name: "Lab Puppies Illinois", year: "2026", url: "https://labpuppiesillinois.com/", image: "/projects/labpuppies.webp", tags: ["WordPress", "Elementor", "ACF Pro", "Custom code"] },
   { slug: "limestudio", name: "Lime Studio", year: "2026", url: "https://webcam-studio-lime.com/", image: "/projects/limestudio.webp", tags: ["WordPress", "Elementor Pro", "ACF Pro", "Custom code"] },
+  { slug: "valence", name: "Valence Peptides", year: "2025", url: "https://valencepeptides.com/", image: "/projects/valence.webp", tags: ["WordPress", "WooCommerce", "BeTheme", "Muffin Builder"] },
   { slug: "bhlabs", name: "BH Labs", year: "2025", url: "https://bh-labs.com/", image: "/projects/bhlabs.webp", tags: ["WordPress", "Elementor", "ACF"] },
 ];
 

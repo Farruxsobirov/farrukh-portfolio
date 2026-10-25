@@ -115,6 +115,11 @@ export const en = {
         summary:
           "Russian-language recruitment site for a Saint Petersburg studio, with an earnings calculator, vacancies, reviews, news and FAQ. Built with Elementor Pro, ACF Pro and custom code.",
       },
+      valence: {
+        kind: "WooCommerce store on WordPress",
+        summary:
+          "Online store for a research peptide brand. Product catalogue, cart, checkout and customer accounts on WooCommerce, with every page designed in BeTheme's Muffin Builder.",
+      },
       bhlabs: {
         kind: "Corporate website on WordPress",
         summary:

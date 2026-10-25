@@ -114,6 +114,11 @@ export const uz: Dict = {
         summary:
           "Sankt-Peterburgdagi studiya uchun rus tilidagi rekruting sayti: daromad kalkulyatori, vakansiyalar, sharhlar, yangiliklar va FAQ. Elementor Pro, ACF Pro va maxsus kod bilan yaratilgan.",
       },
+      valence: {
+        kind: "WordPress’dagi WooCommerce do‘kon",
+        summary:
+          "Tadqiqot peptidlari brendi uchun internet-do‘kon. WooCommerce’da mahsulotlar katalogi, savatcha, buyurtma rasmiylashtirish va mijoz kabinetlari; barcha sahifalar BeTheme’ning Muffin Builder’ida yaratilgan.",
+      },
       bhlabs: {
         kind: "WordPress’dagi korporativ sayt",
         summary:
