@@ -9,7 +9,10 @@
   "assets": {
     "directory": "./out",
     "binding": "ASSETS",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // Paths without a language prefix ("/", "/logvia/") and the contact API go to the
+    // Worker first; everything under /en, /uz, /ru and the build files is served directly.
+    "run_worker_first": ["/*", "!/_next/*", "!/en/*", "!/uz/*", "!/ru/*", "!/projects/*"]
   },
   "observability": { "enabled": true }
 }
