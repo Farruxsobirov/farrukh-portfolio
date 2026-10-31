@@ -25,6 +25,7 @@ export const en = {
     journey: "Journey",
     work: "Work",
     services: "Services",
+    products: "Products",
     contact: "Contact",
   },
   header: {
@@ -144,6 +145,19 @@ export const en = {
       { title: "Elementor landing pages", text: "Pixel-perfect Figma to WordPress, responsive on every device." },
       { title: "Fixes & speed optimisation", text: "Errors, bugs, migrations, audits and making slow sites fast again." },
     ],
+  },
+  products: {
+    eyebrow: "Products",
+    titleA: "My own plugins.",
+    titleB: "Born from client work.",
+    tagline: "Login, registration and Google sign-in for WooCommerce",
+    text: "Replaces the default WooCommerce login with a popup, sign-ups verified by a six-digit email code and one-click Google sign-in. Works with any theme.",
+    points: ["Accounts created only after the email is verified", "Drag and drop registration form builder", "Google sign-in, captcha and rate limits built in"],
+    explore: "Explore Logvia",
+    exploreSub: "Free + Pro",
+    nextTitle: "Plugin number two",
+    nextText: "In the works. Tell me which part of your store needs fixing next.",
+    suggest: "Suggest a plugin",
   },
   contact: {
     faqEyebrow: "FAQ",

@@ -26,6 +26,7 @@ export const uz: Dict = {
     journey: "Yo‘lim",
     work: "Ishlarim",
     services: "Xizmatlar",
+    products: "Mahsulotlar",
     contact: "Aloqa",
   },
   header: {
@@ -143,6 +144,19 @@ export const uz: Dict = {
       { title: "Elementor landing sahifalari", text: "Figma’dan WordPress’ga piksel aniqligida, har qanday qurilmaga moslashadi." },
       { title: "Tuzatish va tezlashtirish", text: "Xatolar, nosozliklar, ko‘chirish, audit va sekin saytlarni yana tez ishlatish." },
     ],
+  },
+  products: {
+    eyebrow: "Mahsulotlar",
+    titleA: "O‘z plaginlarim.",
+    titleB: "Mijozlar bilan ishlashdan tug‘ilgan.",
+    tagline: "WooCommerce uchun kirish, ro‘yxatdan o‘tish va Google orqali kirish",
+    text: "WooCommerce’ning standart kirish oynasini popup, olti xonali email kodi bilan tasdiqlanadigan ro‘yxatdan o‘tish va bir bosishda Google orqali kirish bilan almashtiradi. Har qanday mavzu bilan ishlaydi.",
+    points: ["Akkaunt faqat email tasdiqlangandan keyin yaratiladi", "Drag & drop ro‘yxatdan o‘tish forma quruvchisi", "Google orqali kirish, captcha va urinishlar cheklovi"],
+    explore: "Logvia bilan tanishish",
+    exploreSub: "Bepul + Pro",
+    nextTitle: "Ikkinchi plagin",
+    nextText: "Ustida ishlayapman. Do‘koningizning qaysi qismi yaxshilanishi kerakligini yozing.",
+    suggest: "G‘oya taklif qilish",
   },
   contact: {
     faqEyebrow: "Savollar",

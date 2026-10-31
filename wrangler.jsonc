@@ -1,0 +1,15 @@
+{
+  // Cloudflare Worker that serves the static Next.js export from ./out
+  // Build command: npm run build   Deploy command: npx wrangler deploy
+  "name": "farrukh-portfolio",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  },
+  "observability": { "enabled": true }
+}

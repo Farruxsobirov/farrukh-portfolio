@@ -7,7 +7,7 @@ export const site = {
   initials: "FS",
   timezone: "UTC+5",
   email: "farrux.work.in@gmail.com",
-  url: "https://farrukh-portfolio-three.vercel.app",
+  url: "https://farrukh-portfolio.farrux-work-in.workers.dev", // change to your own domain later
   telegram: "https://t.me/FarruxSobirov",
   telegramHandle: "@FarruxSobirov",
   fiverr: "https://www.fiverr.com/farrux_sobirov",
@@ -19,7 +19,7 @@ export const site = {
   ],
 };
 
-export const navIds = ["top", "about", "journey", "work", "services", "contact"] as const;
+export const navIds = ["top", "about", "journey", "work", "services", "products", "contact"] as const;
 export type NavId = (typeof navIds)[number];
 
 export const stats = [

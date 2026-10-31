@@ -9,7 +9,8 @@ Personal portfolio built with **Next.js 16**, **React 19**, **Tailwind CSS 4**, 
 - Live dot-matrix charts in the About cards
 - Pinned "Journey" timeline: a dotted calendar ruler that becomes a perspective road
 - Dark → light dot transition into a 3D curved project carousel (Three.js)
-- Services, tech-stack marquee, FAQ, contact form (opens the visitor's email app)
+- Services, tech-stack marquee, FAQ, contact form (sent to Telegram)
+- Products section and Logvia plugin pages with light/dark mode and a mega menu
 - Optional UI sounds (off by default), reduced-motion support, responsive down to phones
 
 ## Edit the content
@@ -31,18 +32,31 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Deploy on Vercel
+## Products
 
-1. Push this repository to GitHub.
-2. In Vercel: **Add New → Project → Import** the repository.
-3. Keep the defaults (Framework: Next.js) and click **Deploy**.
+Plugin pages live next to the portfolio and share its design, with a light/dark switch and a mega menu:
 
-Every push to `main` redeploys automatically.
+- `/{lang}/logvia/` – Logvia overview, pricing and FAQ
+- `/{lang}/logvia/docs/`, `/{lang}/logvia/changelog/`
+- `/{lang}/terms/`, `/{lang}/privacy/`, `/{lang}/refund/`
+
+Copy and prices: [`src/content/logvia.ts`](src/content/logvia.ts). Docs and legal text: [`src/content/logvia-pages.ts`](src/content/logvia-pages.ts). Screenshots: `public/logvia/`.
+
+## Deploy on Cloudflare
+
+The site is a static export (`out/`) served by a small Cloudflare Worker ([`worker/index.js`](worker/index.js)) that
+sends `/` to the right language and forwards the contact form to Telegram.
+
+1. In Cloudflare: **Workers & Pages → Create → Import a repository** and pick this repository.
+2. Build command: `npm run build` · Deploy command: `npx wrangler deploy` (settings come from [`wrangler.jsonc`](wrangler.jsonc)).
+3. Every push to the production branch redeploys automatically.
+
+Run it locally like production: `npm run build && npx wrangler dev`.
 
 ## Contact form → Telegram
 
-The form posts to `/api/contact`, which forwards the message to Telegram.
-Set two environment variables in Vercel (**Settings → Environment Variables**), then redeploy:
+The form posts to `/api/contact`, which the Worker forwards to Telegram.
+Add two secrets in Cloudflare (**Worker → Settings → Variables and Secrets**, type *Secret*):
 
 | Name | Value |
 |---|---|
