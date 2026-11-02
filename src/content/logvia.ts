@@ -64,10 +64,11 @@ export const compare: { label: string; free: boolean }[] = [
   { label: "Popup, smart menu items and Google sign-in", free: true },
   { label: "Form builder with 15 field types", free: true },
   { label: "Captcha, rate limits and accounts required at checkout", free: true },
+  { label: "Editable email texts and members-only mode", free: true },
   { label: "File upload, profile photo, username and account type fields", free: false },
   { label: "Manual approval for B2B and wholesale", free: false },
-  { label: "Log in to add to cart, protected cart and members-only popup", free: false },
-  { label: "Password-less sign-up and editable emails", free: false },
+  { label: "Log in to add to cart and protected cart", free: false },
+  { label: "Password-less sign-up", free: false },
   { label: "Extra fields in My Account and on the Users screen", free: false },
 ];
 
