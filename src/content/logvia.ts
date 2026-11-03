@@ -2,10 +2,10 @@
 
 export const logvia = {
   name: "Logvia",
-  version: "1.3.1",
+  version: "1.3.3",
   wporg: "https://wordpress.org/plugins/logvia/",
   support: "https://wordpress.org/support/plugin/logvia/",
-  inReview: true, // set to false once WordPress.org approves the plugin
+  inReview: false, // approved on WordPress.org on 3 November 2026
   waitlist: (plan: string) =>
     `mailto:farrux.work.in@gmail.com?subject=${encodeURIComponent(`Logvia Pro ${plan} waitlist`)}`,
 };
@@ -82,6 +82,29 @@ export const faq = [
 ];
 
 export const releases = [
+  {
+    version: "1.3.3",
+    date: "3 November 2026",
+    iso: "2026-11-03",
+    title: "Now on WordPress.org",
+    notes: [
+      "Phone field with round country flags, a searchable country list and the dialling code shown in the field",
+      "A pasted \"+998 …\" number picks the country by itself",
+      "Popup tab colour settings under Settings → Logvia → Appearance",
+      "Theme button hover colours no longer show on the popup tabs and buttons",
+      "Half-width fields now line up at the top",
+    ],
+  },
+  {
+    version: "1.3.2",
+    date: "2 November 2026",
+    iso: "2026-11-02",
+    title: "Editable email texts",
+    notes: [
+      "Email texts and members-only mode are now editable in the plugin settings",
+      "Removed the custom CSS box; use Additional CSS or the Site Editor instead",
+    ],
+  },
   {
     version: "1.3.1",
     date: "31 October 2026",
