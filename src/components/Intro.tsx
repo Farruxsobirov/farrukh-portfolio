@@ -73,7 +73,7 @@ export default function Intro() {
               </motion.span>
               {site.name} — {t.common.role}
             </span>
-            <span className="inline-block min-w-[2.9ch] text-right text-[clamp(64px,12vw,180px)] leading-[0.8] font-medium tracking-[-0.06em] tabular-nums">
+            <span className="inline-block min-w-[3.6ch] text-right text-[clamp(64px,12vw,180px)] leading-[0.8] font-medium tracking-[-0.06em] tabular-nums">
               {count}
               <span className="text-accent">%</span>
             </span>

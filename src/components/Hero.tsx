@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { site } from "@/content/site";
@@ -11,30 +11,10 @@ import { Pill } from "./ui";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const useIso = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export default function Hero() {
   const { t } = useI18n();
   const root = useRef<HTMLElement>(null);
-  const word = useRef<HTMLDivElement>(null);
-  const wordWrap = useRef<HTMLDivElement>(null);
-
-  // Fit the wordmark to the full container width.
-  useIso(() => {
-    const wrap = wordWrap.current;
-    const el = word.current;
-    if (!wrap || !el) return;
-    const fit = () => {
-      el.style.fontSize = "100px";
-      const ratio = wrap.clientWidth / el.scrollWidth;
-      el.style.fontSize = `${100 * ratio}px`;
-    };
-    fit();
-    const ro = new ResizeObserver(fit);
-    ro.observe(wrap);
-    document.fonts?.ready.then(fit);
-    return () => ro.disconnect();
-  }, []);
 
   useEffect(() => {
     const el = root.current;
@@ -120,13 +100,13 @@ export default function Hero() {
           {t.hero.strong} <span className="text-white/70">{t.hero.soft}</span>
         </h1>
 
-        <div ref={wordWrap} className="relative pb-5 [container-type:inline-size] [grid-area:word] md:pb-[2vw]" role="img" aria-label={site.name}>
+        <div className="relative pb-5 [container-type:inline-size] [grid-area:word] md:pb-[2vw]" role="img" aria-label={site.name}>
           <div
-            ref={word}
             aria-hidden
             className="flex w-max leading-[0.78] font-normal tracking-[-0.06em] whitespace-nowrap"
-            // Width of "FARRUKH" is 3.77em, so this fills the row before any JavaScript runs (no layout shift).
-            style={{ fontSize: "26.5cqw" }}
+            // "FARRUKH" is 3.77em wide, so 26.52cqw fills the row exactly. Pure CSS: no JavaScript
+            // measuring, so nothing jumps while the web font loads.
+            style={{ fontSize: "26.52cqw" }}
           >
             {site.wordmark.split("").map((l, i) => (
               <span key={i} className="block h-[0.8em] overflow-hidden">
