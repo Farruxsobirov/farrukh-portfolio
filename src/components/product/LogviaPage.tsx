@@ -267,10 +267,10 @@ export default function LogviaPage() {
                   ))}
                 </ul>
                 <Pill
-                  label="Join the waitlist"
-                  sub="Pro launches soon"
+                  label={`Buy ${p.name}`}
+                  sub="14-day money-back guarantee"
                   tone={p.featured ? "accent" : "dark"}
-                  href={logvia.waitlist(p.name)}
+                  href={logvia.checkout(p.licenses)}
                   className={`relative ${p.featured ? "" : "!bg-p-ink !text-p-bg"}`}
                 />
               </motion.div>

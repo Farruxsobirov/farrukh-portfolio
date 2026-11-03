@@ -6,8 +6,10 @@ export const logvia = {
   wporg: "https://wordpress.org/plugins/logvia/",
   support: "https://wordpress.org/support/plugin/logvia/",
   inReview: false, // approved on WordPress.org on 3 November 2026
-  waitlist: (plan: string) =>
-    `mailto:farrux.work.in@gmail.com?subject=${encodeURIComponent(`Logvia Pro ${plan} waitlist`)}`,
+  // Freemius checkout (product 43705, Pro plan 76919). The public key is not a secret.
+  freemius: { productId: 43705, planId: 76919, publicKey: "pk_7a2375ac4a4990befe9df080cb618" },
+  checkout: (licenses: number | "unlimited") =>
+    `https://checkout.freemius.com/product/43705/plan/76919/licenses/${licenses}/`,
 };
 
 export const facts = [
@@ -54,9 +56,9 @@ export const extras = [
 ] as const;
 
 export const plans = [
-  { name: "Personal", sites: "1 website", price: "$20", perks: ["All Pro features", "One year of updates", "Email support"], featured: false },
-  { name: "Business", sites: "5 websites", price: "$39", perks: ["All Pro features", "One year of updates", "Priority email support"], featured: true },
-  { name: "Agency", sites: "Unlimited websites", price: "$69", perks: ["All Pro features", "One year of updates", "Priority email support"], featured: false },
+  { name: "Personal", licenses: 1, sites: "1 website", price: "$20", perks: ["All Pro features", "One year of updates", "Email support"], featured: false },
+  { name: "Business", licenses: 5, sites: "5 websites", price: "$39", perks: ["All Pro features", "One year of updates", "Priority email support"], featured: true },
+  { name: "Agency", licenses: "unlimited" as const, sites: "Unlimited websites", price: "$69", perks: ["All Pro features", "One year of updates", "Priority email support"], featured: false },
 ];
 
 export const compare: { label: string; free: boolean }[] = [
