@@ -7,7 +7,7 @@ export const site = {
   initials: "FS",
   timezone: "UTC+5",
   email: "farrux.work.in@gmail.com",
-  url: "https://farrukh-portfolio.farrux-work-in.workers.dev", // change to your own domain later
+  url: "https://sobirov.dev",
   telegram: "https://t.me/FarruxSobirov",
   telegramHandle: "@FarruxSobirov",
   fiverr: "https://www.fiverr.com/farrux_sobirov",
