@@ -226,7 +226,7 @@ export const en = {
     docsEyebrow: "Logvia · Documentation",
     docsTitle: "Set up Logvia.",
     docsLead: "Everything you need to set up Logvia on your store. Most sites are ready after the first three steps.",
-    legalEyebrow: "Legal · Last updated 31 October 2026",
+    legalEyebrow: "Legal · Last updated 3 November 2026",
     termsTitle: "Terms.",
     privacyTitle: "Privacy.",
     refundTitle: "Refunds.",

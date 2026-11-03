@@ -220,7 +220,7 @@ export const uz: LogviaCopy = {
     docsEyebrow: "Logvia · Qo‘llanma",
     docsTitle: "Logvia’ni sozlang.",
     docsLead: "Do‘koningizda Logvia’ni sozlash uchun kerak bo‘lgan hamma narsa. Ko‘p saytlar dastlabki uch qadamdan keyin tayyor bo‘ladi.",
-    legalEyebrow: "Huquqiy · Oxirgi yangilanish: 31-oktabr, 2026",
+    legalEyebrow: "Huquqiy · Oxirgi yangilanish: 3-noyabr, 2026",
     termsTitle: "Shartlar.",
     privacyTitle: "Maxfiylik.",
     refundTitle: "Pulni qaytarish.",
@@ -401,7 +401,7 @@ logvia_registration_complete( $user_id, $pending )</code></pre>
   <p class="note">Bu tarjima qulaylik uchun berilgan. Nizo bo‘lsa, inglizcha matn asosiy hisoblanadi.</p>`,
 
   privacyHtml: `<h2>Ushbu sayt</h2>
-  <p>Bu sayt analitika yoki reklama kuzatuvchilaridan foydalanmaydi. U brauzeringizda ikkita kichik sozlamani saqlaydi: tilingiz va yorug‘ yoki qorong‘i rejim tanlovingiz. Ovozni yoqsangiz, bu tanlov ham saqlanadi. Hosting provayderi Cloudflare saytni yetkazish va himoya qilish uchun IP manzillar kabi standart so‘rov ma’lumotlarini qayta ishlaydi. Aloqa formasi orqali xabar yuborsangiz, u menga Telegram orqali yetkaziladi.</p>
+  <p>Bu sayt tashriflar sonini va sahifa tezligini o‘lchash uchun Cloudflare Web Analytics’dan foydalanadi. U cookie qo‘ymaydi, sizni boshqa saytlarda kuzatmaydi va shaxsiy ma’lumot yig‘maydi. Reklama kuzatuvchilari yo‘q. Sayt brauzeringizda bir nechta kichik sozlamani saqlaydi: tilingiz, yorug‘ yoki qorong‘i rejim tanlovingiz va, agar yoqsangiz, ovoz. Hosting provayderi Cloudflare saytni yetkazish va himoya qilish uchun IP manzillar kabi standart so‘rov ma’lumotlarini qayta ishlaydi. Aloqa formasi orqali xabar yuborsangiz, u menga Telegram orqali yetkaziladi.</p>
   <h2>Litsenziya sotib olganingizda</h2>
   <p>Buyurtmani rasmiylashtirish uchun reselerim ismingiz, emailingiz, hisob-kitob manzilingiz va to‘lov ma’lumotlaringizni yig‘adi. Men ismingiz, emailingiz, sotib olgan rejangiz va litsenziyani faollashtirgan saytlaringiz haqida ma’lumot olaman. Bundan yangilanishlarni yetkazish, yordam berish va litsenziyangiz haqidagi muhim xabarlarni yuborish uchun foydalanaman.</p>
   <h2>Menga yozganingizda</h2>
