@@ -38,7 +38,7 @@ function RoundButton({
       onClick={onClick}
       className={`press grid size-11 place-items-center rounded-full border md:size-12 transition-colors duration-200 ${
         accent
-          ? "border-accent bg-accent text-white hover:bg-accent-ink"
+          ? "border-accent-strong bg-accent-strong text-white hover:bg-accent-ink"
           : "border-white/10 bg-[#2a2a2a] text-white hover:bg-[#3a3a3a]"
       }`}
     >

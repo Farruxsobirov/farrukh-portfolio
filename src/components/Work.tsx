@@ -205,7 +205,7 @@ export default function Work() {
                     </h3>
                     <p className="mt-2 max-w-[56ch] text-[15px] leading-[1.45] text-muted">{t.work.projects[p.slug]?.summary}</p>
                   </div>
-                  <p className="text-[14px] text-soft tabular-nums">{p.year}</p>
+                  <p className="text-[14px] text-muted tabular-nums">{p.year}</p>
                 </div>
                 <ul className="mt-4 flex flex-wrap gap-1.5 px-1">
                   {p.tags.map((tag) => (

@@ -23,7 +23,7 @@ export function Roll({ children }: { children: ReactNode }) {
 type Tone = "accent" | "ghost" | "ghostLight" | "light" | "dark";
 
 const tones: Record<Tone, { wrap: string; dot: string }> = {
-  accent: { wrap: "bg-accent text-white", dot: "bg-white text-accent" },
+  accent: { wrap: "bg-accent-strong text-white", dot: "bg-white text-accent" },
   ghost: { wrap: "border border-ink/20 text-ink", dot: "bg-ink text-white" },
   ghostLight: { wrap: "border border-white/30 text-white", dot: "bg-white text-ink" },
   light: { wrap: "bg-white text-ink", dot: "bg-ink text-white" },
@@ -52,7 +52,7 @@ export function Pill({ label, sub, tone = "accent", href, onClick, external, typ
         <span className="text-[17px] leading-[1.1] font-medium tracking-[-0.02em]">
           <Roll>{label}</Roll>
         </span>
-        {sub && <span className="text-[11px] leading-tight font-medium opacity-80">{sub}</span>}
+        {sub && <span className={`text-[11px] leading-tight font-medium ${tone === "accent" ? "" : "opacity-80"}`}>{sub}</span>}
       </span>
     </>
   );

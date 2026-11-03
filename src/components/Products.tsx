@@ -55,7 +55,7 @@ export default function Products() {
               loading="lazy"
               className="absolute bottom-[9%] left-[7%] w-[44%] rounded-[16px] shadow-[0_40px_80px_-30px_rgba(0,0,0,.9)] transition-transform duration-700 ease-[var(--ease-snap)] group-hover:translate-y-2"
             />
-            <span className="absolute top-5 left-5 rounded-full bg-accent px-3 py-1 text-[12px] font-medium text-white">WooCommerce</span>
+            <span className="absolute top-5 left-5 rounded-full bg-accent-strong px-3 py-1 text-[12px] font-medium text-white">WooCommerce</span>
           </a>
 
           <div className="flex flex-col justify-between gap-10 p-5 md:p-10">

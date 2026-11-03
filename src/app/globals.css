@@ -4,7 +4,7 @@
   --bg: #f3f3f2;
   --ink: #111111;
   --muted: #686868;
-  --soft: #a9a9a9;
+  --soft: #8a8a8a; /* 3:1 on --bg for large text */
   --rule: rgba(17, 17, 17, 0.12);
   --dark: #141414;
   --dark-2: #1d1d1d;
@@ -12,6 +12,7 @@
   --dark-rule: rgba(255, 255, 255, 0.1);
   --accent: #fe4701;
   --accent-ink: #c93600;
+  --accent-strong: #d63c00; /* brand orange darkened to 4.6:1 behind white text */
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-snap: cubic-bezier(0.2, 1, 0.25, 1);
@@ -31,6 +32,7 @@
   --color-dark-card: var(--dark-card);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-accent-strong: var(--accent-strong);
   --font-sans: var(--font-grotesk), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --color-p-bg: var(--p-bg);
   --color-p-ink: var(--p-ink);

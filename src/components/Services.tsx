@@ -39,7 +39,7 @@ export default function Services() {
                 <Halftone variant={s.pattern as Variant} color={i === 0 ? "#fe4701" : "rgba(255,255,255,.9)"} spacing={10} maxRadius={3.4} />
                 <span className="absolute top-5 left-5 text-[13px] font-medium text-white/60">{String(i + 1).padStart(2, "0")}.</span>
                 {i === 0 && (
-                  <span className="absolute top-4 right-4 rounded-full bg-accent px-3 py-1 text-[12px] font-medium text-white">{t.services.popular}</span>
+                  <span className="absolute top-4 right-4 rounded-full bg-accent-strong px-3 py-1 text-[12px] font-medium text-white">{t.services.popular}</span>
                 )}
               </div>
               <div className="flex flex-1 flex-col justify-between gap-6 p-5 md:p-6">
@@ -60,7 +60,7 @@ export default function Services() {
 
       <div className="mt-16 md:mt-32">
         <p className="gutter mb-6 text-[13px] font-medium text-muted">{t.services.stackEyebrow}</p>
-        <div className="flex overflow-hidden border-y border-rule py-6 md:py-8" aria-label={`${t.services.technologies}: ${stack.join(", ")}`}>
+        <div className="flex overflow-hidden border-y border-rule py-6 md:py-8" role="img" aria-label={`${t.services.technologies}: ${stack.join(", ")}`}>
           <div className="marquee flex w-max shrink-0" aria-hidden>
             {[...stack, ...stack].map((t, i) => (
               <span key={i} className="flex items-center gap-8 pr-8 text-[clamp(36px,5vw,76px)] leading-none font-medium tracking-[-0.05em] whitespace-nowrap">

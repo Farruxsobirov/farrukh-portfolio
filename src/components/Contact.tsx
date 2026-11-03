@@ -142,7 +142,7 @@ export default function Contact() {
                     className="size-full object-cover grayscale transition-[filter,scale] duration-500 group-hover/avatar:scale-110 group-hover/avatar:grayscale-0"
                   />
                 </span>
-                <span aria-label={t.common.online} className="pulse-dot absolute right-0 bottom-0.5 size-4 rounded-full border-[3px] border-white bg-[#3ddc84]" />
+                <span role="img" aria-label={t.common.online} className="pulse-dot absolute right-0 bottom-0.5 size-4 rounded-full border-[3px] border-white bg-[#3ddc84]" />
               </span>
               <span className="text-[14px] leading-tight">
                 <span className="block font-medium">{site.name}</span>

@@ -181,7 +181,7 @@ export default function ProductHeader() {
           <ThemeToggle />
           <a
             href={links.pricing}
-            className="group press hidden h-11 items-center gap-2 rounded-full bg-accent pr-5 pl-1.5 text-[15px] font-medium text-white transition-colors hover:bg-accent-ink sm:inline-flex"
+            className="group press hidden h-11 items-center gap-2 rounded-full bg-accent-strong pr-5 pl-1.5 text-[15px] font-medium text-white transition-colors hover:bg-accent-ink sm:inline-flex"
           >
             <span className="grid size-8 place-items-center rounded-full bg-white text-accent transition-transform duration-300 ease-[var(--ease-snap)] group-hover:rotate-[-45deg]">
               <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -272,7 +272,7 @@ export default function ProductHeader() {
                         height={1251}
                         className="absolute -right-6 -bottom-24 w-[58%] rounded-2xl shadow-[0_30px_60px_-20px_rgba(0,0,0,.9)] transition-transform duration-700 ease-[var(--ease-snap)] group-hover:-translate-y-3"
                       />
-                      <span className="relative inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[12px] font-medium">{h.newRelease}</span>
+                      <span className="relative inline-flex items-center gap-2 rounded-full bg-accent-strong px-3 py-1 text-[12px] font-medium">{h.newRelease}</span>
                       <p className="relative mt-4 max-w-[13ch] text-[22px] leading-[1.1] font-medium tracking-[-0.03em]">{h.isHere.replace("{v}", logvia.version)}</p>
                       <p className="relative mt-2 text-[14px] text-white/60">{h.seeChanged}</p>
                     </a>

@@ -21,13 +21,13 @@ const extraIcons: Record<(typeof extras)[number]["icon"], React.ReactNode> = {
 
 function Check({ on, yes, no }: { on: boolean; yes: string; no: string }) {
   return on ? (
-    <span className="mx-auto grid size-7 place-items-center rounded-full bg-accent text-white" aria-label={yes}>
+    <span role="img" className="mx-auto grid size-7 place-items-center rounded-full bg-accent text-white" aria-label={yes}>
       <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <path d="m5 12 5 5 9-10" />
       </svg>
     </span>
   ) : (
-    <span className="mx-auto block h-0.5 w-3 rounded bg-p-muted/50" aria-label={no} />
+    <span role="img" className="mx-auto block h-0.5 w-3 rounded bg-p-muted/50" aria-label={no} />
   );
 }
 
@@ -257,7 +257,7 @@ export default function LogviaPage() {
                 {p.featured && (
                   <>
                     <div className="dot-grid-dark pointer-events-none absolute inset-0" />
-                    <span className="absolute top-6 right-6 rounded-full bg-accent px-3 py-1 text-[12px] font-medium text-white">{t.mostPick}</span>
+                    <span className="absolute top-6 right-6 rounded-full bg-accent-strong px-3 py-1 text-[12px] font-medium text-white">{t.mostPick}</span>
                   </>
                 )}
                 <h3 className="relative text-[24px] font-medium tracking-[-0.03em]">{pc.name}</h3>
@@ -296,7 +296,7 @@ export default function LogviaPage() {
               <div key={group.title} className={`rounded-card p-6 ${group.pro ? "bg-[#161616] text-white" : "bg-p-card"}`}>
                 <p className="flex items-center justify-between gap-3 text-[19px] font-medium tracking-[-0.02em]">
                   {group.title}
-                  <span className={`rounded-full px-3 py-1 text-[12px] font-medium ${group.pro ? "bg-accent text-white" : "bg-p-card-2 text-p-ink"}`}>
+                  <span className={`rounded-full px-3 py-1 text-[12px] font-medium ${group.pro ? "bg-accent-strong text-white" : "bg-p-card-2 text-p-ink"}`}>
                     {group.pro ? "Pro" : t.freePlusPro}
                   </span>
                 </p>

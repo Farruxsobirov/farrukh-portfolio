@@ -120,7 +120,7 @@ export default function Hero() {
           {t.hero.strong} <span className="text-white/70">{t.hero.soft}</span>
         </h1>
 
-        <div ref={wordWrap} className="relative pb-5 [container-type:inline-size] [grid-area:word] md:pb-[2vw]" aria-label={site.name}>
+        <div ref={wordWrap} className="relative pb-5 [container-type:inline-size] [grid-area:word] md:pb-[2vw]" role="img" aria-label={site.name}>
           <div
             ref={word}
             aria-hidden
