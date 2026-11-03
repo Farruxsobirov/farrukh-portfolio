@@ -63,13 +63,13 @@ export function Pill({ label, sub, tone = "accent", href, onClick, external, typ
   };
   if (href) {
     return (
-      <a href={href} onClick={handle} className={cls} {...(external ? { target: "_blank", rel: "noreferrer" } : {})}>
+      <a href={href} onClick={handle} data-sound-self className={cls} {...(external ? { target: "_blank", rel: "noreferrer" } : {})}>
         {inner}
       </a>
     );
   }
   return (
-    <button type={type} onClick={handle} className={cls}>
+    <button type={type} onClick={handle} data-sound-self className={cls}>
       {inner}
     </button>
   );

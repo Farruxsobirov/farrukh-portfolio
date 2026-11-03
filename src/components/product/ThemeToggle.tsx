@@ -1,6 +1,8 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { useI18n } from "@/i18n/context";
+import { logviaCopy } from "@/content/logvia-copy";
 
 type Mode = "light" | "dark";
 
@@ -18,6 +20,7 @@ function subscribe(onChange: () => void) {
 
 export default function ThemeToggle({ className = "" }: { className?: string }) {
   const mode = useSyncExternalStore(subscribe, current, () => "light" as Mode);
+  const tt = logviaCopy(useI18n().lang).theme;
 
   const toggle = () => {
     const next: Mode = current() === "dark" ? "light" : "dark";
@@ -32,8 +35,8 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
     <button
       type="button"
       onClick={toggle}
-      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      title={dark ? "Light mode" : "Dark mode"}
+      aria-label={dark ? tt.toLight : tt.toDark}
+      title={dark ? tt.light : tt.dark}
       className={`press relative grid size-11 place-items-center overflow-hidden rounded-full border border-p-rule bg-p-card text-p-ink transition-colors hover:border-p-ink/40 ${className}`}
     >
       <span

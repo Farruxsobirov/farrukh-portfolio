@@ -1,20 +1,22 @@
 import LongPage from "@/components/product/LongPage";
-import { docsHtml, docsToc } from "@/content/logvia-pages";
+import { logviaCopy } from "@/content/logvia-copy";
 import { productMeta } from "../../meta";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/logvia/docs">) {
-  return productMeta(params, "/logvia/docs/", "Logvia documentation", "How to install and set up Logvia: account page, popup, menu items, shortcodes, form builder, Google sign-in, captcha, WooCommerce options and developer hooks.");
+  return productMeta(params, "/logvia/docs/", "docs");
 }
 
 export default async function Page({ params }: PageProps<"/[lang]/logvia/docs">) {
   const { lang } = await params;
+  const c = logviaCopy(lang);
   return (
     <LongPage
-      eyebrow="Logvia · Documentation"
-      title="Set up Logvia."
-      lead="Everything you need to set up Logvia on your store. Most sites are ready after the first three steps."
-      html={docsHtml.replaceAll("{contact}", `/${lang}/#contact`)}
-      toc={docsToc}
+      eyebrow={c.long.docsEyebrow}
+      title={c.long.docsTitle}
+      lead={c.long.docsLead}
+      html={c.docsHtml.replaceAll("{contact}", `/${lang}/#contact`)}
+      toc={c.docsToc}
+      onThisPage={c.long.onThisPage}
     />
   );
 }

@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useI18n } from "@/i18n/context";
-import { compare, extras, facts, faq, features, logvia, plans } from "@/content/logvia";
+import { compare, extras, features, logvia, plans } from "@/content/logvia";
+import { logviaCopy } from "@/content/logvia-copy";
 import Halftone from "../Halftone";
 import { Pill } from "../ui";
 import { LogviaMark } from "./ProductHeader";
@@ -18,15 +19,15 @@ const extraIcons: Record<(typeof extras)[number]["icon"], React.ReactNode> = {
   palette: <><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" /></>,
 };
 
-function Check({ on }: { on: boolean }) {
+function Check({ on, yes, no }: { on: boolean; yes: string; no: string }) {
   return on ? (
-    <span className="mx-auto grid size-7 place-items-center rounded-full bg-accent text-white" aria-label="Included">
+    <span className="mx-auto grid size-7 place-items-center rounded-full bg-accent text-white" aria-label={yes}>
       <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <path d="m5 12 5 5 9-10" />
       </svg>
     </span>
   ) : (
-    <span className="mx-auto block h-0.5 w-3 rounded bg-p-muted/50" aria-label="Not included" />
+    <span className="mx-auto block h-0.5 w-3 rounded bg-p-muted/50" aria-label={no} />
   );
 }
 
@@ -39,6 +40,8 @@ function Shot({ src, w, h, alt, className = "" }: { src: string; w: number; h: n
 
 export default function LogviaPage() {
   const { lang } = useI18n();
+  const c = logviaCopy(lang);
+  const t = c.page;
   const letters = "LOGVIA".split("");
   return (
     <>
@@ -59,7 +62,7 @@ export default function LogviaPage() {
                 className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[13px] text-white/80 backdrop-blur"
               >
                 <span className="pulse-dot size-2 rounded-full bg-accent" />v{logvia.version}
-                {logvia.inReview ? " · In review on WordPress.org" : " · Free on WordPress.org"}
+                {logvia.inReview ? t.inReview : t.onWporg}
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 40 }}
@@ -67,7 +70,7 @@ export default function LogviaPage() {
                 transition={{ duration: 1.1, ease, delay: 0.18 }}
                 className="tight mt-6 max-w-[14ch] text-[clamp(44px,6.2vw,96px)] font-medium"
               >
-                The login your WooCommerce <span className="text-white/45">store deserves.</span>
+                {t.heroA}<span className="text-white/45">{t.heroB}</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 24 }}
@@ -75,7 +78,7 @@ export default function LogviaPage() {
                 transition={{ duration: 1, ease, delay: 0.3 }}
                 className="mt-6 max-w-[44ch] text-[18px] leading-[1.5] text-white/65"
               >
-                Customers sign up with a verified email or one click with Google, in a popup that never takes them away from what they were buying.
+                {t.heroLead}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
@@ -83,8 +86,8 @@ export default function LogviaPage() {
                 transition={{ duration: 1, ease, delay: 0.4 }}
                 className="mt-9 flex flex-wrap gap-2"
               >
-                <Pill label="Download free" sub="WordPress.org" href={logvia.wporg} external />
-                <Pill label="See Pro plans" tone="ghostLight" href="#pricing" />
+                <Pill label={t.download} sub="WordPress.org" href={logvia.wporg} external />
+                <Pill label={t.seePro} tone="ghostLight" href="#pricing" />
               </motion.div>
             </div>
 
@@ -95,7 +98,7 @@ export default function LogviaPage() {
                 transition={{ duration: 1.3, ease, delay: 0.35 }}
                 className="absolute top-[2%] right-[4%] w-[62%]"
               >
-                <Shot src="/logvia/popup.webp" w={988} h={1251} alt="Logvia popup with Log in and Sign up tabs" />
+                <Shot src="/logvia/popup.webp" w={988} h={1251} alt={t.popupAlt} />
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 100, rotate: -6 }}
@@ -103,7 +106,7 @@ export default function LogviaPage() {
                 transition={{ duration: 1.3, ease, delay: 0.5 }}
                 className="absolute bottom-[4%] left-[2%] w-[52%]"
               >
-                <Shot src="/logvia/verify.webp" w={1240} h={910} alt="Verify your email screen with six code boxes" />
+                <Shot src="/logvia/verify.webp" w={1240} h={910} alt={c.features[0].alt} />
               </motion.div>
             </div>
           </div>
@@ -127,7 +130,7 @@ export default function LogviaPage() {
       {/* Facts */}
       <section className="gutter mx-auto max-w-[1440px]">
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-b border-p-rule py-10 md:grid-cols-4 md:py-14">
-          {facts.map((f) => (
+          {c.facts.map((f) => (
             <div key={f.title}>
               <p className="flex items-center gap-2 text-[19px] font-medium tracking-[-0.02em]">
                 <span className="size-1.5 rounded-full bg-accent" />
@@ -142,14 +145,16 @@ export default function LogviaPage() {
       {/* Features */}
       <section className="gutter mx-auto flex max-w-[1440px] flex-col gap-3 py-16 md:py-28">
         <div className="mb-8 md:mb-14">
-          <p className="mb-3 text-[13px] font-medium text-p-muted">What it does</p>
+          <p className="mb-3 text-[13px] font-medium text-p-muted">{t.whatItDoes}</p>
           <h2 className="heading max-w-[18ch] text-[clamp(36px,4.6vw,68px)]">
-            Three things your store <span className="text-p-muted">gets right away.</span>
+            {t.featuresA}<span className="text-p-muted">{t.featuresB}</span>
           </h2>
         </div>
-        {features.map((f, i) => (
+        {features.map((f, i) => {
+          const fc = c.features[i];
+          return (
           <motion.article
-            key={f.title}
+            key={i}
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
@@ -161,13 +166,13 @@ export default function LogviaPage() {
                 <p className="flex items-center gap-2 text-[13px] font-medium text-p-muted">
                   <span className="text-p-ink tabular-nums">0{i + 1}</span>
                   <span className="size-1 rounded-full bg-accent" />
-                  {f.eyebrow}
+                  {fc.eyebrow}
                 </p>
-                <h3 className="heading mt-5 max-w-[14ch] text-[clamp(30px,3.2vw,48px)]">{f.title}</h3>
-                <p className="mt-5 max-w-[44ch] text-[17px] leading-[1.55] text-p-muted">{f.text}</p>
+                <h3 className="heading mt-5 max-w-[14ch] text-[clamp(30px,3.2vw,48px)]">{fc.title}</h3>
+                <p className="mt-5 max-w-[44ch] text-[17px] leading-[1.55] text-p-muted">{fc.text}</p>
               </div>
               <ul className="flex flex-col gap-2.5 border-t border-p-rule pt-6">
-                {f.points.map((p) => (
+                {fc.points.map((p) => (
                   <li key={p} className="flex items-center gap-3 text-[15px] font-medium tracking-[-0.01em]">
                     <span className="size-2 shrink-0 rounded-full bg-accent" />
                     {p}
@@ -184,25 +189,26 @@ export default function LogviaPage() {
                 src={f.image.src}
                 w={f.image.w}
                 h={f.image.h}
-                alt={f.image.alt}
+                alt={fc.alt}
                 className={`relative ${f.wide ? "w-full max-w-[760px] rounded-[14px]" : "w-full max-w-[400px]"}`}
               />
             </div>
           </motion.article>
-        ))}
+          );
+        })}
       </section>
 
       {/* Everything else */}
       <section className="gutter mx-auto max-w-[1440px] pb-16 md:pb-28">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <h2 className="heading max-w-[16ch] text-[clamp(32px,3.8vw,56px)]">
-            And everything else <span className="text-p-muted">a store needs.</span>
+            {t.extrasA}<span className="text-p-muted">{t.extrasB}</span>
           </h2>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {extras.map((x, i) => (
             <motion.div
-              key={x.title}
+              key={x.icon}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-5% 0px" }}
@@ -214,8 +220,8 @@ export default function LogviaPage() {
                   {extraIcons[x.icon]}
                 </svg>
               </span>
-              <h3 className="mt-6 text-[21px] font-medium tracking-[-0.03em]">{x.title}</h3>
-              <p className="mt-1.5 text-[15px] leading-[1.5] text-p-muted">{x.text}</p>
+              <h3 className="mt-6 text-[21px] font-medium tracking-[-0.03em]">{c.extras[i].title}</h3>
+              <p className="mt-1.5 text-[15px] leading-[1.5] text-p-muted">{c.extras[i].text}</p>
             </motion.div>
           ))}
         </div>
@@ -226,20 +232,22 @@ export default function LogviaPage() {
         <div className="gutter mx-auto max-w-[1440px]">
           <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="mb-3 text-[13px] font-medium text-p-muted">Pricing</p>
+              <p className="mb-3 text-[13px] font-medium text-p-muted">{t.pricing}</p>
               <h2 className="heading max-w-[14ch] text-[clamp(36px,4.6vw,68px)]">
-                Free forever. <span className="text-p-muted">Pro when you grow.</span>
+                {t.pricingA}<span className="text-p-muted">{t.pricingB}</span>
               </h2>
             </div>
             <p className="max-w-[40ch] text-[16px] leading-[1.5] text-p-muted">
-              The free plugin is complete on its own. Pro adds tools for wholesale, members-only and custom sign-up flows.
+              {t.pricingLead}
             </p>
           </div>
 
           <div className="grid gap-3 lg:grid-cols-3">
-            {plans.map((p, i) => (
+            {plans.map((p, i) => {
+              const pc = c.plans[i];
+              return (
               <motion.div
-                key={p.name}
+                key={pc.name}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -249,17 +257,17 @@ export default function LogviaPage() {
                 {p.featured && (
                   <>
                     <div className="dot-grid-dark pointer-events-none absolute inset-0" />
-                    <span className="absolute top-6 right-6 rounded-full bg-accent px-3 py-1 text-[12px] font-medium text-white">Most stores pick this</span>
+                    <span className="absolute top-6 right-6 rounded-full bg-accent px-3 py-1 text-[12px] font-medium text-white">{t.mostPick}</span>
                   </>
                 )}
-                <h3 className="relative text-[24px] font-medium tracking-[-0.03em]">{p.name}</h3>
-                <p className={`relative mt-1 text-[15px] ${p.featured ? "text-white/60" : "text-p-muted"}`}>{p.sites}</p>
+                <h3 className="relative text-[24px] font-medium tracking-[-0.03em]">{pc.name}</h3>
+                <p className={`relative mt-1 text-[15px] ${p.featured ? "text-white/60" : "text-p-muted"}`}>{pc.sites}</p>
                 <p className="relative mt-10 flex items-baseline gap-1.5">
                   <span className="text-[64px] leading-none font-medium tracking-[-0.05em]">{p.price}</span>
-                  <span className={`text-[15px] ${p.featured ? "text-white/60" : "text-p-muted"}`}>/ year</span>
+                  <span className={`text-[15px] ${p.featured ? "text-white/60" : "text-p-muted"}`}>{t.perYear}</span>
                 </p>
                 <ul className={`relative mt-8 mb-10 flex flex-1 flex-col gap-3 border-t pt-6 ${p.featured ? "border-white/10" : "border-p-rule"}`}>
-                  {p.perks.map((perk) => (
+                  {pc.perks.map((perk) => (
                     <li key={perk} className="flex items-center gap-3 text-[15px] font-medium">
                       <span className="size-2 shrink-0 rounded-full bg-accent" />
                       {perk}
@@ -267,39 +275,40 @@ export default function LogviaPage() {
                   ))}
                 </ul>
                 <Pill
-                  label={`Buy ${p.name}`}
-                  sub="14-day money-back guarantee"
+                  label={t.buy.replace("{plan}", pc.name)}
+                  sub={t.guarantee}
                   tone={p.featured ? "accent" : "dark"}
                   href={logvia.checkout(p.licenses)}
                   className={`relative ${p.featured ? "" : "!bg-p-ink !text-p-bg"}`}
                 />
               </motion.div>
-            ))}
+              );
+            })}
           </div>
-          <p className="mt-6 text-[14px] text-p-muted">Every plan includes a 14-day money-back guarantee. Prices in US dollars.</p>
+          <p className="mt-6 text-[14px] text-p-muted">{t.pricesNote}</p>
 
           {/* Phones: two short lists instead of a sideways-scrolling table */}
           <div className="mt-14 grid gap-3 md:hidden">
             {[
-              { title: "In Free and Pro", rows: compare.filter((r) => r.free), pro: false },
-              { title: "Only in Pro", rows: compare.filter((r) => !r.free), pro: true },
+              { title: t.inBoth, rows: c.compare.filter((_, i) => compare[i]), pro: false },
+              { title: t.onlyPro, rows: c.compare.filter((_, i) => !compare[i]), pro: true },
             ].map((group) => (
               <div key={group.title} className={`rounded-card p-6 ${group.pro ? "bg-[#161616] text-white" : "bg-p-card"}`}>
                 <p className="flex items-center justify-between gap-3 text-[19px] font-medium tracking-[-0.02em]">
                   {group.title}
                   <span className={`rounded-full px-3 py-1 text-[12px] font-medium ${group.pro ? "bg-accent text-white" : "bg-p-card-2 text-p-ink"}`}>
-                    {group.pro ? "Pro" : "Free + Pro"}
+                    {group.pro ? "Pro" : t.freePlusPro}
                   </span>
                 </p>
                 <ul className={`mt-4 flex flex-col border-t ${group.pro ? "border-white/10" : "border-p-rule"}`}>
                   {group.rows.map((row) => (
-                    <li key={row.label} className={`flex items-start gap-3 border-b py-3.5 text-[15px] leading-snug last:border-b-0 ${group.pro ? "border-white/10" : "border-p-rule"}`}>
+                    <li key={row} className={`flex items-start gap-3 border-b py-3.5 text-[15px] leading-snug last:border-b-0 ${group.pro ? "border-white/10" : "border-p-rule"}`}>
                       <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent text-white" aria-hidden>
                         <svg viewBox="0 0 24 24" className="size-3" fill="none" stroke="currentColor" strokeWidth={3.2} strokeLinecap="round" strokeLinejoin="round">
                           <path d="m5 12 5 5 9-10" />
                         </svg>
                       </span>
-                      {row.label}
+                      {row}
                     </li>
                   ))}
                 </ul>
@@ -309,20 +318,20 @@ export default function LogviaPage() {
 
           <div className="mt-14 hidden overflow-x-auto rounded-card bg-p-card p-2 md:block">
             <table className="w-full min-w-[620px] border-collapse text-left">
-              <caption className="sr-only">Logvia Free and Pro compared</caption>
+              <caption className="sr-only">{t.compareCaption}</caption>
               <thead>
                 <tr>
-                  <th scope="col" className="p-5 text-[15px] font-medium text-p-muted">What you get</th>
-                  <th scope="col" className="w-[120px] p-5 text-center text-[17px] font-medium">Free</th>
+                  <th scope="col" className="p-5 text-[15px] font-medium text-p-muted">{t.whatYouGet}</th>
+                  <th scope="col" className="w-[120px] p-5 text-center text-[17px] font-medium">{t.free}</th>
                   <th scope="col" className="w-[120px] p-5 text-center text-[17px] font-medium text-accent">Pro</th>
                 </tr>
               </thead>
               <tbody>
-                {compare.map((row) => (
-                  <tr key={row.label} className="border-t border-p-rule">
-                    <td className="p-5 text-[15px]">{row.label}</td>
-                    <td className="p-5"><Check on={row.free} /></td>
-                    <td className="p-5"><Check on /></td>
+                {c.compare.map((label, i) => (
+                  <tr key={label} className="border-t border-p-rule">
+                    <td className="p-5 text-[15px]">{label}</td>
+                    <td className="p-5"><Check on={compare[i]} yes={t.included} no={t.notIncluded} /></td>
+                    <td className="p-5"><Check on yes={t.included} no={t.notIncluded} /></td>
                   </tr>
                 ))}
               </tbody>
@@ -335,23 +344,23 @@ export default function LogviaPage() {
       <section className="border-t border-p-rule py-16 md:py-28">
         <div className="gutter mx-auto grid max-w-[1440px] gap-10 lg:grid-cols-[1fr_1.6fr]">
           <div>
-            <p className="mb-3 text-[13px] font-medium text-p-muted">FAQ</p>
+            <p className="mb-3 text-[13px] font-medium text-p-muted">{t.faq}</p>
             <h2 className="heading text-[clamp(36px,4.6vw,68px)]">
-              Questions. <span className="text-p-muted">Answers.</span>
+              {t.faqA}<span className="text-p-muted">{t.faqB}</span>
             </h2>
             <div className="mt-8 flex items-center gap-4">
               <span className="grid size-12 place-items-center rounded-2xl bg-p-ink text-p-bg">
                 <LogviaMark />
               </span>
               <p className="text-[15px] leading-snug text-p-muted">
-                Something else?
+                {t.somethingElse}
                 <br />
-                <a href={`/${lang}/#contact`} className="font-medium text-p-ink underline decoration-accent underline-offset-4">Write to me</a>
+                <a href={`/${lang}/#contact`} className="font-medium text-p-ink underline decoration-accent underline-offset-4">{t.writeToMe}</a>
               </p>
             </div>
           </div>
           <div className="border-t border-p-rule">
-            {faq.map((item, i) => (
+            {c.faq.map((item, i) => (
               <details key={item.q} className="group border-b border-p-rule" open={i === 0}>
                 <summary className="flex items-center justify-between gap-6 py-6 text-[clamp(19px,1.6vw,23px)] font-medium tracking-[-0.025em]">
                   {item.q}

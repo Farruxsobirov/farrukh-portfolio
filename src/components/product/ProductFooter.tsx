@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/i18n/context";
 import { site } from "@/content/site";
 import { logvia } from "@/content/logvia";
+import { logviaCopy } from "@/content/logvia-copy";
 import Halftone from "../Halftone";
 import Logo from "../Logo";
 import { Pill, Roll } from "../ui";
@@ -14,11 +15,12 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function ProductFooter() {
   const { lang } = useI18n();
   const base = `/${lang}`;
+  const { header: h, footer: f } = logviaCopy(lang);
   const cols = [
-    { title: "Logvia", links: [["Overview", `${base}/logvia/`], ["Pricing", `${base}/logvia/#pricing`], ["Documentation", `${base}/logvia/docs/`], ["Changelog", `${base}/logvia/changelog/`]] },
-    { title: "Help", links: [["WordPress.org", logvia.wporg], ["Support forum", logvia.support], ["Contact", `${base}/#contact`]] },
-    { title: "Legal", links: [["Terms", `${base}/terms/`], ["Privacy", `${base}/privacy/`], ["Refunds", `${base}/refund/`]] },
-    { title: "Elsewhere", links: [["Portfolio", `${base}/`], ...site.socials.filter((s) => s.label !== "email").map((s) => [s.label, s.href])] },
+    { title: "Logvia", links: [[h.overview, `${base}/logvia/`], [h.pricing, `${base}/logvia/#pricing`], [h.documentation, `${base}/logvia/docs/`], [h.changelog, `${base}/logvia/changelog/`]] },
+    { title: f.help, links: [["WordPress.org", logvia.wporg], [h.supportForum, logvia.support], [h.contact, `${base}/#contact`]] },
+    { title: f.legal, links: [[f.terms, `${base}/terms/`], [f.privacy, `${base}/privacy/`], [f.refunds, `${base}/refund/`]] },
+    { title: f.elsewhere, links: [[h.portfolio, `${base}/`], ...site.socials.filter((s) => s.label !== "email").map((s) => [s.label, s.href])] },
   ];
 
   return (
@@ -34,12 +36,12 @@ export default function ProductFooter() {
           transition={{ duration: 1.1, ease }}
           className="tight max-w-[15ch] text-[clamp(44px,7vw,112px)] font-medium"
         >
-          A login customers trust.
-          <span className="text-p-muted"> In five minutes.</span>
+          {f.titleA}
+          <span className="text-p-muted">{f.titleB}</span>
         </motion.h2>
         <div className="mt-10 flex flex-wrap gap-2">
-          <Pill label="Download free" sub="WordPress.org" href={logvia.wporg} external />
-          <Pill label="Read the docs" tone="ghost" href={`${base}/logvia/docs/`} className="!border-p-rule !text-p-ink" />
+          <Pill label={f.download} sub="WordPress.org" href={logvia.wporg} external />
+          <Pill label={f.readDocs} tone="ghost" href={`${base}/logvia/docs/`} className="!border-p-rule !text-p-ink" />
         </div>
 
         <div className="mt-16 grid grid-cols-2 gap-10 border-t border-p-rule py-10 md:mt-24 md:grid-cols-5">
@@ -50,7 +52,7 @@ export default function ProductFooter() {
               </span>
               <span className="text-[17px] font-medium tracking-[-0.03em]">{site.name}</span>
             </a>
-            <p className="mt-4 max-w-[26ch] text-[14px] leading-relaxed text-p-muted">WordPress and WooCommerce plugins, made in Tashkent.</p>
+            <p className="mt-4 max-w-[26ch] text-[14px] leading-relaxed text-p-muted">{f.about}</p>
           </div>
           {cols.map((c) => (
             <div key={c.title}>
@@ -73,7 +75,7 @@ export default function ProductFooter() {
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-p-rule py-6 text-[13px] text-p-muted">
           <p>
-            © 2026 {site.name}. WordPress and WooCommerce are trademarks of their owners; this site is not affiliated with them.
+            © 2026 {site.name}. {f.rights}
           </p>
           <ThemeToggle />
         </div>

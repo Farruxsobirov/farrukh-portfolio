@@ -7,9 +7,11 @@ import { useI18n } from "@/i18n/context";
 import { locales, localeNames, LOCALE_COOKIE } from "@/i18n/config";
 import { site } from "@/content/site";
 import { logvia } from "@/content/logvia";
+import { logviaCopy } from "@/content/logvia-copy";
 import Logo from "../Logo";
 import { Roll } from "../ui";
 import ThemeToggle from "./ThemeToggle";
+import SoundToggle from "./SoundToggle";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 type MenuId = "products" | "resources" | null;
@@ -36,9 +38,10 @@ function Chevron({ open }: { open: boolean }) {
 function ProductLang({ compact }: { compact?: boolean }) {
   const { lang } = useI18n();
   const pathname = usePathname() || `/${lang}/`;
+  const h = logviaCopy(lang).header;
   const rest = pathname.replace(/^\/(en|uz|ru)(?=\/|$)/, "");
   return (
-    <nav aria-label="Language" className="flex items-center gap-1">
+    <nav aria-label={h.language} className="flex items-center gap-1">
       {locales.map((l) => (
         <a
           key={l}
@@ -65,6 +68,7 @@ function ProductLang({ compact }: { compact?: boolean }) {
 
 export default function ProductHeader() {
   const { lang } = useI18n();
+  const h = logviaCopy(lang).header;
   const base = `/${lang}`;
   const [menu, setMenu] = useState<MenuId>(null);
   const [mobile, setMobile] = useState(false);
@@ -151,21 +155,21 @@ export default function ProductHeader() {
       onPointerLeave={(e) => e.pointerType === "mouse" && closeSoon()}
     >
       <div className="gutter mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-4">
-        <a href={links.portfolio} className="group flex items-center gap-3 text-p-ink" aria-label={`${site.name}, portfolio`}>
+        <a href={links.portfolio} className="group flex items-center gap-3 text-p-ink" aria-label={`${site.name}, ${h.homeLabel}`}>
           <span className="block transition-transform duration-700 ease-[var(--ease-snap)] group-hover:rotate-90">
             <Logo className="size-9" />
           </span>
           <span className="hidden text-[16px] font-medium tracking-[-0.02em] sm:block">{site.name}</span>
         </a>
 
-        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
-          {trigger("products", "Products")}
-          {trigger("resources", "Resources")}
+        <nav aria-label={h.main} className="hidden items-center gap-1 lg:flex">
+          {trigger("products", h.products)}
+          {trigger("resources", h.resources)}
           <a href={links.pricing} onPointerEnter={() => closeSoon()} className="group flex h-10 items-center rounded-full px-4 text-[15px] font-medium tracking-[-0.01em] text-p-ink/80 hover:text-p-ink">
-            <Roll>Pricing</Roll>
+            <Roll>{h.pricing}</Roll>
           </a>
           <a href={links.work} onPointerEnter={() => closeSoon()} className="group flex h-10 items-center rounded-full px-4 text-[15px] font-medium tracking-[-0.01em] text-p-ink/80 hover:text-p-ink">
-            <Roll>Portfolio</Roll>
+            <Roll>{h.portfolio}</Roll>
           </a>
         </nav>
 
@@ -173,6 +177,7 @@ export default function ProductHeader() {
           <div className="hidden md:block">
             <ProductLang />
           </div>
+          <SoundToggle />
           <ThemeToggle />
           <a
             href={links.pricing}
@@ -183,11 +188,11 @@ export default function ProductHeader() {
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </span>
-            <Roll>Get Logvia</Roll>
+            <Roll>{h.getLogvia}</Roll>
           </a>
           <button
             type="button"
-            aria-label={mobile ? "Close menu" : "Open menu"}
+            aria-label={mobile ? h.closeMenu : h.openMenu}
             aria-expanded={mobile}
             onClick={() => setMobile((m) => !m)}
             className="press grid size-11 place-items-center rounded-full bg-p-ink text-p-bg lg:hidden"
@@ -226,15 +231,15 @@ export default function ProductHeader() {
                             <Roll>Logvia</Roll>
                             <span className="rounded-full bg-accent/12 px-2 py-0.5 text-[11px] font-semibold text-accent">v{logvia.version}</span>
                           </span>
-                          <span className="mt-1 block text-[14px] leading-snug text-p-muted">Login, registration and Google sign-in for WooCommerce</span>
+                          <span className="mt-1 block text-[14px] leading-snug text-p-muted">{h.tagline}</span>
                         </span>
                       </a>
                       <div className="mt-6 grid grid-cols-2 gap-1 border-t border-p-rule pt-4">
                         {[
-                          ["Overview", links.overview],
-                          ["Pricing", links.pricing],
-                          ["Documentation", links.docs],
-                          ["Changelog", links.changelog],
+                          [h.overview, links.overview],
+                          [h.pricing, links.pricing],
+                          [h.documentation, links.docs],
+                          [h.changelog, links.changelog],
                         ].map(([label, href]) => (
                           <a key={label} href={href} className="group flex items-center gap-2 rounded-xl px-2 py-2 text-[15px] font-medium text-p-ink/85 hover:bg-p-card-2 hover:text-p-ink">
                             <span className="size-1.5 rounded-full bg-accent" />
@@ -250,11 +255,11 @@ export default function ProductHeader() {
                             <path d="M12 5v14M5 12h14" />
                           </svg>
                         </span>
-                        <p className="mt-4 text-[18px] font-medium tracking-[-0.02em]">Plugin number two</p>
-                        <p className="mt-1 text-[14px] leading-snug text-p-muted">In the works. Tell me what your store needs next.</p>
+                        <p className="mt-4 text-[18px] font-medium tracking-[-0.02em]">{h.nextTitle}</p>
+                        <p className="mt-1 text-[14px] leading-snug text-p-muted">{h.nextText}</p>
                       </div>
                       <a href={links.contact} className="group mt-6 inline-flex text-[14px] font-medium text-p-ink underline decoration-accent underline-offset-4">
-                        <Roll>Suggest a plugin</Roll>
+                        <Roll>{h.suggest}</Roll>
                       </a>
                     </div>
                     <a href={links.changelog} className="group relative min-h-[230px] overflow-hidden rounded-[24px] bg-[#1b1b1b] p-6 text-white">
@@ -267,20 +272,20 @@ export default function ProductHeader() {
                         height={1251}
                         className="absolute -right-6 -bottom-24 w-[58%] rounded-2xl shadow-[0_30px_60px_-20px_rgba(0,0,0,.9)] transition-transform duration-700 ease-[var(--ease-snap)] group-hover:-translate-y-3"
                       />
-                      <span className="relative inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[12px] font-medium">New release</span>
-                      <p className="relative mt-4 max-w-[13ch] text-[22px] leading-[1.1] font-medium tracking-[-0.03em]">Logvia {logvia.version} is here.</p>
-                      <p className="relative mt-2 text-[14px] text-white/60">See what changed</p>
+                      <span className="relative inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[12px] font-medium">{h.newRelease}</span>
+                      <p className="relative mt-4 max-w-[13ch] text-[22px] leading-[1.1] font-medium tracking-[-0.03em]">{h.isHere.replace("{v}", logvia.version)}</p>
+                      <p className="relative mt-2 text-[14px] text-white/60">{h.seeChanged}</p>
                     </a>
                   </div>
                 ) : (
                   <div className="grid grid-cols-3 gap-3">
                     {[
-                      { title: "Documentation", text: "Set up Logvia step by step.", href: links.docs },
-                      { title: "Changelog", text: "Every release and what changed.", href: links.changelog },
-                      { title: "Support forum", text: "Free help on WordPress.org.", href: logvia.support, external: true },
-                      { title: "Contact", text: "Pro, licences and ideas.", href: links.contact },
-                      { title: "Portfolio", text: "Websites I have built for clients.", href: links.work },
-                      { title: "Legal", text: "Terms, privacy and refunds.", href: links.terms },
+                      { ...h.resourceCards.docs, href: links.docs, external: false },
+                      { ...h.resourceCards.changelog, href: links.changelog, external: false },
+                      { ...h.resourceCards.support, href: logvia.support, external: true },
+                      { ...h.resourceCards.contact, href: links.contact, external: false },
+                      { ...h.resourceCards.portfolio, href: links.work, external: false },
+                      { ...h.resourceCards.legal, href: links.terms, external: false },
                     ].map((r) => (
                       <a
                         key={r.title}
@@ -317,8 +322,8 @@ export default function ProductHeader() {
         >
           <div className="gutter flex flex-col gap-8 py-8">
             {[
-              { title: "Logvia", items: [["Overview", links.overview], ["Pricing", links.pricing], ["Documentation", links.docs], ["Changelog", links.changelog]] },
-              { title: "More", items: [["Support forum", logvia.support], ["Contact", links.contact], ["Portfolio", links.work]] },
+              { title: "Logvia", items: [[h.overview, links.overview], [h.pricing, links.pricing], [h.documentation, links.docs], [h.changelog, links.changelog]] },
+              { title: h.more, items: [[h.supportForum, logvia.support], [h.contact, links.contact], [h.portfolio, links.work]] },
             ].map((group, gi) => (
               <div key={group.title}>
                 <p className="mb-3 text-[13px] font-medium text-p-muted">{group.title}</p>

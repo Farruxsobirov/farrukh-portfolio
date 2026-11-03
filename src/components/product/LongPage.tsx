@@ -5,12 +5,14 @@ export default function LongPage({
   lead,
   html,
   toc,
+  onThisPage = "On this page",
 }: {
   eyebrow: string;
   title: string;
   lead?: string;
   html: string;
   toc?: { id: string; label: string }[];
+  onThisPage?: string;
 }) {
   return (
     <div className="gutter mx-auto max-w-[1440px] pb-20 md:pb-32">
@@ -24,8 +26,8 @@ export default function LongPage({
       </header>
       <div className={`pt-12 md:pt-16 ${toc ? "grid gap-12 lg:grid-cols-[240px_minmax(0,1fr)]" : ""}`}>
         {toc && (
-          <nav aria-label="On this page" className="hidden self-start lg:sticky lg:top-24 lg:block">
-            <p className="mb-3 text-[13px] font-medium text-p-muted">On this page</p>
+          <nav aria-label={onThisPage} className="hidden self-start lg:sticky lg:top-24 lg:block">
+            <p className="mb-3 text-[13px] font-medium text-p-muted">{onThisPage}</p>
             <ul className="flex flex-col border-l border-p-rule">
               {toc.map((t) => (
                 <li key={t.id}>
