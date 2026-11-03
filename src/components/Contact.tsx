@@ -135,6 +135,10 @@ export default function Contact() {
                   <img
                     src="/farrukh-contact.webp"
                     alt={site.name}
+                    width={128}
+                    height={128}
+                    loading="lazy"
+                    decoding="async"
                     className="size-full object-cover grayscale transition-[filter,scale] duration-500 group-hover/avatar:scale-110 group-hover/avatar:grayscale-0"
                   />
                 </span>

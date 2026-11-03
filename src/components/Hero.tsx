@@ -47,7 +47,9 @@ export default function Hero() {
 
       // Entrance once the intro shutters lift: each letter slides up into its slot
       gsap.set(letterIn, { yPercent: reduced ? 0 : 50 });
-      gsap.set(reveal, { y: reduced ? 0 : 30, opacity: reduced ? 1 : 0 });
+      // The headline stays visible (only slides): hiding it would delay the page's
+      // Largest Contentful Paint until all JavaScript has run.
+      gsap.set(reveal, { y: reduced ? 0 : 30, opacity: (_i: number, el: HTMLElement) => (reduced || el.tagName === "H1" ? 1 : 0) });
       const enter = () => {
         gsap.to(letterIn, { yPercent: 0, duration: 1.4, ease: "expo.out", stagger: 0.06 });
         gsap.to(reveal, { y: 0, opacity: 1, duration: 1.1, ease: "expo.out", stagger: 0.08, delay: 0.25 });
@@ -118,12 +120,13 @@ export default function Hero() {
           {t.hero.strong} <span className="text-white/70">{t.hero.soft}</span>
         </h1>
 
-        <div ref={wordWrap} className="relative pb-5 [grid-area:word] md:pb-[2vw]" aria-label={site.name}>
+        <div ref={wordWrap} className="relative pb-5 [container-type:inline-size] [grid-area:word] md:pb-[2vw]" aria-label={site.name}>
           <div
             ref={word}
             aria-hidden
             className="flex w-max leading-[0.78] font-normal tracking-[-0.06em] whitespace-nowrap"
-            style={{ fontSize: "16vw" }}
+            // Width of "FARRUKH" is 3.77em, so this fills the row before any JavaScript runs (no layout shift).
+            style={{ fontSize: "26.5cqw" }}
           >
             {site.wordmark.split("").map((l, i) => (
               <span key={i} className="block h-[0.8em] overflow-hidden">

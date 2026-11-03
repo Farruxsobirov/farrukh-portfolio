@@ -170,9 +170,12 @@ export default function Halftone({ variant, color = "#ffffff", spacing = 9, maxR
       }
     };
 
+    // Slower frame rate on phones and weak CPUs; the dots still move smoothly enough.
+    const weak = window.innerWidth < 768 || (navigator.hardwareConcurrency || 8) <= 4;
+    const frame = weak ? 66 : 40;
     let last = 0;
     const loop = (now: number) => {
-      if (now - last > 32) {
+      if (now - last > frame) {
         last = now;
         draw((now - start) / 1000);
       }
@@ -181,15 +184,31 @@ export default function Halftone({ variant, color = "#ffffff", spacing = 9, maxR
 
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
+    // Draw one still frame now; start moving only once the page has finished loading,
+    // so the animation does not compete with the first render.
+    let started = false;
+    const run = () => {
+      cancelAnimationFrame(raf);
+      if (started && visible && !reduced && !document.hidden) raf = requestAnimationFrame(loop);
+    };
     const io = new IntersectionObserver(([e]) => {
       visible = e.isIntersecting;
-      cancelAnimationFrame(raf);
-      if (visible && !reduced) raf = requestAnimationFrame(loop);
+      run();
     });
     io.observe(canvas);
+    const begin = () => {
+      started = true;
+      run();
+    };
+    const hasIdle = typeof window.requestIdleCallback === "function";
+    const startId = hasIdle ? window.requestIdleCallback(begin, { timeout: 2500 }) : setTimeout(begin, 1200);
+    document.addEventListener("visibilitychange", run);
     resize();
 
     return () => {
+      if (hasIdle) window.cancelIdleCallback(startId as number);
+      else clearTimeout(startId as ReturnType<typeof setTimeout>);
+      document.removeEventListener("visibilitychange", run);
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();

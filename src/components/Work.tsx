@@ -107,24 +107,32 @@ export default function Work() {
           near.disconnect();
         }
       },
-      { rootMargin: "250% 0px" },
+      { rootMargin: "150% 0px" },
     );
     near.observe(section);
-    // …and fetch three.js + screenshots in the background once the page is idle.
+    // …and fetch the three.js code (without starting it) once the visitor starts scrolling.
+    // Loading and starting it at page load blocked the main thread for seconds.
     const hasIdle = typeof window.requestIdleCallback === "function";
-    const idle = (cb: () => void) => (hasIdle ? window.requestIdleCallback(cb, { timeout: 3000 }) : setTimeout(cb, 1500));
-    const idleId = idle(() => {
-      loadCarousel();
-      setMounted(true);
-    });
+    let idleId: number | ReturnType<typeof setTimeout> | undefined;
+    const prefetch = () => {
+      window.removeEventListener("scroll", prefetch);
+      window.removeEventListener("pointerdown", prefetch);
+      idleId = hasIdle ? window.requestIdleCallback(() => void loadCarousel(), { timeout: 4000 }) : setTimeout(() => void loadCarousel(), 1500);
+    };
+    window.addEventListener("scroll", prefetch, { passive: true, once: true });
+    window.addEventListener("pointerdown", prefetch, { passive: true, once: true });
     window.addEventListener("resize", resize);
     resize();
     return () => {
       st.kill();
       io.disconnect();
       near.disconnect();
-      if (hasIdle) window.cancelIdleCallback(idleId as number);
-      else clearTimeout(idleId as ReturnType<typeof setTimeout>);
+      window.removeEventListener("scroll", prefetch);
+      window.removeEventListener("pointerdown", prefetch);
+      if (idleId !== undefined) {
+        if (hasIdle) window.cancelIdleCallback(idleId as number);
+        else clearTimeout(idleId as ReturnType<typeof setTimeout>);
+      }
       window.removeEventListener("resize", resize);
     };
   }, []);
