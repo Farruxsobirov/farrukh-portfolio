@@ -46,9 +46,11 @@ export const en = {
     more: "More",
     supportForum: "Support forum",
     contact: "Contact",
+    blog: "Blog",
     resourceCards: {
       docs: { title: "Documentation", text: "Set up Logvia step by step." },
       changelog: { title: "Changelog", text: "Every release and what changed." },
+      blog: { title: "Blog", text: "Release notes and how-to guides." },
       support: { title: "Support forum", text: "Free help on WordPress.org." },
       contact: { title: "Contact", text: "Pro, licences and ideas." },
       portfolio: { title: "Portfolio", text: "Websites I have built for clients." },

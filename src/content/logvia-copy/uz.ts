@@ -45,9 +45,11 @@ export const uz: LogviaCopy = {
     more: "Yana",
     supportForum: "Yordam forumi",
     contact: "Aloqa",
+    blog: "Blog",
     resourceCards: {
       docs: { title: "Qo‘llanma", text: "Logvia’ni bosqichma-bosqich sozlang." },
       changelog: { title: "O‘zgarishlar", text: "Har bir versiya va unda nima o‘zgargani." },
+      blog: { title: "Blog", text: "Yangiliklar va qo‘llanmalar." },
       support: { title: "Yordam forumi", text: "WordPress.org’da bepul yordam." },
       contact: { title: "Aloqa", text: "Pro, litsenziyalar va g‘oyalar." },
       portfolio: { title: "Portfolio", text: "Mijozlar uchun qilgan saytlarim." },
@@ -359,6 +361,8 @@ export const uz: LogviaCopy = {
       <li>Logvia Pro’ni xarid xatingizdan yuklab oling va <strong>Plugins → Add New → Upload Plugin</strong> orqali yuklang.</li>
       <li>Faollashtiring va litsenziya kalitini kiriting. Yangi sozlamalar mavjud Logvia yorliqlari ichida paydo bo‘ladi.</li>
     </ol>
+    <p><strong>Google One Tap</strong> Logvia’dagi Google orqali kirish bilan bir xil Google mijozidan foydalanadi. Google Cloud Console’da sayt manzilingizni, masalan <code>https://dokoningiz.uz</code>, <strong>Authorized JavaScript origins</strong> bo‘limiga ham qo‘shing, so‘ng <strong>Google sign-in</strong> yorlig‘ining pastida One Tap’ni yoqing.</p>
+    <p><strong>Aqlli popup triggerlari.</strong> <strong>Popup</strong> yorlig‘ining pastida Pro popupni mehmon saytdan ketmoqchi bo‘lganda (sichqoncha brauzer yorliqlari tomon harakatlanganda yoki telefonda tez yuqoriga aylantirilganda) yoki sahifaning 25%, 50% yoki 75% qismi o‘qilgach ochadi. Ko‘rsatish qoidalari qayerda va kimga ekanini belgilaydi: barcha sahifalar, do‘kon sahifalari yoki siz sanab bergan sahifalar; kompyuter yoki telefon; yangi yoki qaytgan mehmonlar; va qanchalik tez-tez: har ko‘rishda, har tashrifda bir marta, kuniga yoki haftasiga bir marta.</p>
 
     <h2 id="developers">Dasturchilar uchun</h2>
     <p>Filtrlar:</p>

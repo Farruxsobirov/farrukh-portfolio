@@ -41,8 +41,8 @@ export default function Products() {
             <img
               src="/logvia/popup.webp"
               alt="Logvia popup with Log in and Sign up tabs"
-              width={988}
-              height={1251}
+              width={992}
+              height={1608}
               loading="lazy"
               className="absolute top-[9%] right-[8%] w-[46%] rounded-[18px] shadow-[0_40px_80px_-30px_rgba(0,0,0,.9)] transition-transform duration-700 ease-[var(--ease-snap)] group-hover:-translate-y-2"
             />

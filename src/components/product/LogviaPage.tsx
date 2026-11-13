@@ -98,7 +98,7 @@ export default function LogviaPage() {
                 transition={{ duration: 1.3, ease, delay: 0.35 }}
                 className="absolute top-[2%] right-[4%] w-[62%]"
               >
-                <Shot src="/logvia/popup.webp" w={988} h={1251} alt={t.popupAlt} />
+                <Shot src="/logvia/popup.webp" w={992} h={1608} alt={t.popupAlt} />
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 100, rotate: -6 }}

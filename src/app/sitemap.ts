@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { posts } from "@/content/blog";
 import { site } from "@/content/site";
 import { locales } from "@/i18n/config";
 
@@ -10,6 +11,8 @@ const pages: { path: string; priority: number; changeFrequency: "weekly" | "mont
   { path: "/logvia/", priority: 0.9, changeFrequency: "weekly" },
   { path: "/logvia/docs/", priority: 0.7, changeFrequency: "monthly" },
   { path: "/logvia/changelog/", priority: 0.6, changeFrequency: "weekly" },
+  { path: "/blog/", priority: 0.7, changeFrequency: "weekly" },
+  ...posts.map((p) => ({ path: `/blog/${p.slug}/`, priority: 0.6, changeFrequency: "monthly" as const })),
   { path: "/terms/", priority: 0.2, changeFrequency: "yearly" },
   { path: "/privacy/", priority: 0.2, changeFrequency: "yearly" },
   { path: "/refund/", priority: 0.2, changeFrequency: "yearly" },

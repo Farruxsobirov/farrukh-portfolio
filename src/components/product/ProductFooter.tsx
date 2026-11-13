@@ -17,7 +17,7 @@ export default function ProductFooter() {
   const base = `/${lang}`;
   const { header: h, footer: f } = logviaCopy(lang);
   const cols = [
-    { title: "Logvia", links: [[h.overview, `${base}/logvia/`], [h.pricing, `${base}/logvia/#pricing`], [h.documentation, `${base}/logvia/docs/`], [h.changelog, `${base}/logvia/changelog/`]] },
+    { title: "Logvia", links: [[h.overview, `${base}/logvia/`], [h.pricing, `${base}/logvia/#pricing`], [h.documentation, `${base}/logvia/docs/`], [h.changelog, `${base}/logvia/changelog/`], [h.blog, `${base}/blog/`]] },
     { title: f.help, links: [["WordPress.org", logvia.wporg], [h.supportForum, logvia.support], [h.contact, `${base}/#contact`]] },
     { title: f.legal, links: [[f.terms, `${base}/terms/`], [f.privacy, `${base}/privacy/`], [f.refunds, `${base}/refund/`]] },
     { title: f.elsewhere, links: [[h.portfolio, `${base}/`], ...site.socials.filter((s) => s.label !== "email").map((s) => [s.label, s.href])] },

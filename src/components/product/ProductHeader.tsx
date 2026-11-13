@@ -117,6 +117,7 @@ export default function ProductHeader() {
     pricing: `${base}/logvia/#pricing`,
     docs: `${base}/logvia/docs/`,
     changelog: `${base}/logvia/changelog/`,
+    blog: `${base}/blog/`,
     contact: `${base}/#contact`,
     portfolio: `${base}/`,
     work: `${base}/#work`,
@@ -268,8 +269,8 @@ export default function ProductHeader() {
                       <img
                         src="/logvia/popup.webp"
                         alt=""
-                        width={988}
-                        height={1251}
+                        width={992}
+                        height={1608}
                         className="absolute -right-6 -bottom-24 w-[58%] rounded-2xl shadow-[0_30px_60px_-20px_rgba(0,0,0,.9)] transition-transform duration-700 ease-[var(--ease-snap)] group-hover:-translate-y-3"
                       />
                       <span className="relative inline-flex items-center gap-2 rounded-full bg-accent-strong px-3 py-1 text-[12px] font-medium">{h.newRelease}</span>
@@ -282,9 +283,9 @@ export default function ProductHeader() {
                     {[
                       { ...h.resourceCards.docs, href: links.docs, external: false },
                       { ...h.resourceCards.changelog, href: links.changelog, external: false },
+                      { ...h.resourceCards.blog, href: links.blog, external: false },
                       { ...h.resourceCards.support, href: logvia.support, external: true },
                       { ...h.resourceCards.contact, href: links.contact, external: false },
-                      { ...h.resourceCards.portfolio, href: links.work, external: false },
                       { ...h.resourceCards.legal, href: links.terms, external: false },
                     ].map((r) => (
                       <a
@@ -322,7 +323,7 @@ export default function ProductHeader() {
         >
           <div className="gutter flex flex-col gap-8 py-8">
             {[
-              { title: "Logvia", items: [[h.overview, links.overview], [h.pricing, links.pricing], [h.documentation, links.docs], [h.changelog, links.changelog]] },
+              { title: "Logvia", items: [[h.overview, links.overview], [h.pricing, links.pricing], [h.documentation, links.docs], [h.changelog, links.changelog], [h.blog, links.blog]] },
               { title: h.more, items: [[h.supportForum, logvia.support], [h.contact, links.contact], [h.portfolio, links.work]] },
             ].map((group, gi) => (
               <div key={group.title}>
