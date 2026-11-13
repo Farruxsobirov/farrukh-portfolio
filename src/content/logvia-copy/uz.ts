@@ -90,7 +90,7 @@ export const uz: LogviaCopy = {
     pricing: "Narxlar",
     pricingA: "Doim bepul. ",
     pricingB: "O‘sganingizda Pro.",
-    pricingLead: "Bepul plaginning o‘zi to‘liq ishlaydi. Pro esa ulgurji savdo, faqat a’zolar uchun rejim va maxsus ro‘yxatdan o‘tish uchun vositalar qo‘shadi.",
+    pricingLead: "Bepul plaginning o‘zi to‘liq ishlaydi. Pro esa Google One Tap, aqlliroq popup va ulgurji savdo hamda maxsus ro‘yxatdan o‘tish uchun vositalar qo‘shadi.",
     mostPick: "Ko‘pchilik shuni tanlaydi",
     perYear: "/ yil",
     buy: "{plan} rejasini olish",
@@ -112,7 +112,7 @@ export const uz: LogviaCopy = {
   },
 
   facts: [
-    { title: "Haqiqiy bepul versiya", text: "Sinov muddati ham, qulflangan tugmalar ham yo‘q." },
+    { title: "Haqiqiy bepul versiya", text: "Sinov muddati ham, vaqt chegarasi ham yo‘q." },
     { title: "Sukut bo‘yicha maxfiy", text: "Siz yoqmaguningizcha hech narsa saytdan tashqariga chiqmaydi." },
     { title: "Yengil va tez", text: "Oddiy JavaScript, jQuery’siz." },
     { title: "Har qanday mavzu", text: "Klassik, blokli yoki page builder." },
@@ -168,6 +168,9 @@ export const uz: LogviaCopy = {
     "Savatga qo‘shish uchun kirish va himoyalangan savat",
     "Parolsiz ro‘yxatdan o‘tish",
     "My Account va Users sahifasidagi qo‘shimcha maydonlar",
+    "Google One Tap: bir bosishda \"Continue as …\" orqali kirish",
+    "Chiqib ketish niyati va sahifani aylantirish chuqurligi bo‘yicha popup",
+    "Popup qoidalari: sahifalar, qurilmalar, yangi yoki qaytgan mehmonlar, qanchalik tez-tez",
   ],
 
   faq: [
@@ -184,6 +187,14 @@ export const uz: LogviaCopy = {
     title: "Yangiliklar.",
     lead: "Har bir versiya va unda nima o‘zgargani. Dashboard → Updates orqali yangilang.",
     releases: {
+      "1.4.0": {
+        title: "Sozlamalarda Pro imkoniyatlari va Live Preview",
+        notes: [
+          "Sozlamalar bo‘limlarida ixtiyoriy Logvia Pro imkoniyatlari ro‘yxati va tariflarni solishtirish havolasi",
+          "Logvia’ni o‘rnatmasdan sinab ko‘ring: WordPress.org’da Live Preview",
+          "Yangi teg: login popup",
+        ],
+      },
       "1.3.3": {
         title: "Endi WordPress.org’da",
         notes: [

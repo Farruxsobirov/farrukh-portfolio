@@ -91,7 +91,7 @@ export const en = {
     pricing: "Pricing",
     pricingA: "Free forever. ",
     pricingB: "Pro when you grow.",
-    pricingLead: "The free plugin is complete on its own. Pro adds tools for wholesale, members-only and custom sign-up flows.",
+    pricingLead: "The free plugin is complete on its own. Pro adds Google One Tap, smarter popups and tools for wholesale and custom sign-up flows.",
     mostPick: "Most stores pick this",
     perYear: "/ year",
     buy: "Buy {plan}",
@@ -113,7 +113,7 @@ export const en = {
   },
 
   facts: [
-    { title: "A real free version", text: "No trials, no locked buttons." },
+    { title: "A real free version", text: "No trials, no time limits." },
     { title: "Private by default", text: "Nothing leaves your site unless you switch it on." },
     { title: "Light and fast", text: "Plain JavaScript, no jQuery." },
     { title: "Any theme", text: "Classic, block or page builder." },
@@ -173,6 +173,9 @@ export const en = {
     "Log in to add to cart and protected cart",
     "Password-less sign-up",
     "Extra fields in My Account and on the Users screen",
+    "Google One Tap: \"Continue as …\" sign-in with one click",
+    "Exit-intent and scroll-depth popup triggers",
+    "Popup rules: pages, devices, new or returning visitors, how often",
   ],
 
   faq: [
@@ -190,6 +193,14 @@ export const en = {
     lead: "Every release and what changed in it. Update from Dashboard → Updates.",
     // Keyed by version; versions and dates live in logvia.ts.
     releases: {
+      "1.4.0": {
+        title: "Pro features listed in the settings and Live Preview",
+        notes: [
+          "The settings tabs list the features of the optional Logvia Pro add-on, with a link to compare plans",
+          "Try Logvia without installing it: Live Preview on WordPress.org",
+          "New tag: login popup",
+        ],
+      },
       "1.3.3": {
         title: "Now on WordPress.org",
         notes: [
